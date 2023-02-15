@@ -18,6 +18,13 @@
 		B3319978299D1D0000FBA413 /* CharacterDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3319977299D1D0000FBA413 /* CharacterDetailsViewController.swift */; };
 		B331997B299D1F6700FBA413 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331997A299D1F6700FBA413 /* Coordinator.swift */; };
 		B331997D299D1FEB00FBA413 /* CharacterListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331997C299D1FEB00FBA413 /* CharacterListCoordinator.swift */; };
+		B331997F299D235F00FBA413 /* CharacterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331997E299D235F00FBA413 /* CharacterListViewModel.swift */; };
+		B3319981299D24DF00FBA413 /* CharactersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3319980299D24DF00FBA413 /* CharactersService.swift */; };
+		B3319983299D251B00FBA413 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3319982299D251B00FBA413 /* Character.swift */; };
+		B3319985299D31F400FBA413 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3319984299D31F400FBA413 /* Info.swift */; };
+		B3319987299D327F00FBA413 /* CharacterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3319986299D327F00FBA413 /* CharacterResponse.swift */; };
+		B3319989299D356000FBA413 /* CharacterViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3319988299D356000FBA413 /* CharacterViewModelType.swift */; };
+		B331998B299D3A6400FBA413 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331998A299D3A6400FBA413 /* APIError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +60,13 @@
 		B3319977299D1D0000FBA413 /* CharacterDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailsViewController.swift; sourceTree = "<group>"; };
 		B331997A299D1F6700FBA413 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		B331997C299D1FEB00FBA413 /* CharacterListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListCoordinator.swift; sourceTree = "<group>"; };
+		B331997E299D235F00FBA413 /* CharacterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListViewModel.swift; sourceTree = "<group>"; };
+		B3319980299D24DF00FBA413 /* CharactersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersService.swift; sourceTree = "<group>"; };
+		B3319982299D251B00FBA413 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		B3319984299D31F400FBA413 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
+		B3319986299D327F00FBA413 /* CharacterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterResponse.swift; sourceTree = "<group>"; };
+		B3319988299D356000FBA413 /* CharacterViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModelType.swift; sourceTree = "<group>"; };
+		B331998A299D3A6400FBA413 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +159,9 @@
 		B331996D299D1BF300FBA413 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B3319982299D251B00FBA413 /* Character.swift */,
+				B3319986299D327F00FBA413 /* CharacterResponse.swift */,
+				B3319984299D31F400FBA413 /* Info.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -152,6 +169,8 @@
 		B331996E299D1C0000FBA413 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				B331998A299D3A6400FBA413 /* APIError.swift */,
+				B3319980299D24DF00FBA413 /* CharactersService.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -175,7 +194,8 @@
 		B3319971299D1C2E00FBA413 /* CharacterList */ = {
 			isa = PBXGroup;
 			children = (
-				B3319973299D1CBF00FBA413 /* CharacterListViewController.swift */,
+				B331998C299D3BCF00FBA413 /* ViewModels */,
+				B331998D299D3BE300FBA413 /* Views */,
 			);
 			path = CharacterList;
 			sourceTree = "<group>";
@@ -195,6 +215,23 @@
 				B331997C299D1FEB00FBA413 /* CharacterListCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		B331998C299D3BCF00FBA413 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B3319988299D356000FBA413 /* CharacterViewModelType.swift */,
+				B331997E299D235F00FBA413 /* CharacterListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B331998D299D3BE300FBA413 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B3319973299D1CBF00FBA413 /* CharacterListViewController.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,12 +364,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3319983299D251B00FBA413 /* Character.swift in Sources */,
 				B331997D299D1FEB00FBA413 /* CharacterListCoordinator.swift in Sources */,
 				B3319978299D1D0000FBA413 /* CharacterDetailsViewController.swift in Sources */,
+				B3319985299D31F400FBA413 /* Info.swift in Sources */,
 				B331993A299D13DC00FBA413 /* AppDelegate.swift in Sources */,
+				B3319981299D24DF00FBA413 /* CharactersService.swift in Sources */,
+				B331997F299D235F00FBA413 /* CharacterListViewModel.swift in Sources */,
+				B3319987299D327F00FBA413 /* CharacterResponse.swift in Sources */,
 				B331997B299D1F6700FBA413 /* Coordinator.swift in Sources */,
 				B3319974299D1CBF00FBA413 /* CharacterListViewController.swift in Sources */,
+				B3319989299D356000FBA413 /* CharacterViewModelType.swift in Sources */,
 				B3319944299D13DC00FBA413 /* Rick_and_Morty_Demo_iOS.xcdatamodeld in Sources */,
+				B331998B299D3A6400FBA413 /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

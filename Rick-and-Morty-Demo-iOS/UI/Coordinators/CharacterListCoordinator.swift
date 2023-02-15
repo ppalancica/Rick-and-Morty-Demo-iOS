@@ -17,7 +17,9 @@ class CharacterListCoordinator: Coordinator {
     }
 
     func start() {
-        let characterListVC = CharacterListViewController()
+        let charactersService = CharactersService()
+        let viewModel = CharacterListViewModel(charactersService: charactersService)
+        let characterListVC = CharacterListViewController(viewModel: viewModel)
         navigationController.pushViewController(characterListVC, animated: false)
     }
 }
