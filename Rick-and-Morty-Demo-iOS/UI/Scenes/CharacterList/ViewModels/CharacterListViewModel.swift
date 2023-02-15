@@ -11,6 +11,7 @@ protocol CharacterListViewModelType {
     
     var charactersService: CharactersServiceType { get }
     var viewModels: [CharacterViewModel] { get }
+    var charactersCount: Int { get }
     
     func getAllCharactersViewModels(completion: @escaping (Result<[CharacterViewModel], Error>) -> Void)
     func characterViewModel(at index: Int) -> CharacterViewModel?
@@ -20,6 +21,7 @@ class CharacterListViewModel: CharacterListViewModelType {
     
     let charactersService: CharactersServiceType
     private(set) var viewModels: [CharacterViewModel] = []
+    var charactersCount: Int { return viewModels.count }
     
     init(charactersService: CharactersServiceType) {
         self.charactersService = charactersService

@@ -11,6 +11,19 @@ final class CharacterListViewController: UIViewController {
     
     let viewModel: CharacterListViewModelType
     
+    private lazy var charactersCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        layout.itemSize = CGSize(width: 1, height: 1) // The actual size will be configured later
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.collectionViewLayout = layout
+        collectionView.backgroundColor = .white
+        collectionView.register(CharacterCell.self, forCellWithReuseIdentifier: CharacterCell.identifier)
+        
+        return collectionView
+    }()
+    
     init(viewModel: CharacterListViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -25,16 +38,43 @@ final class CharacterListViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        title = "Rick and Morty"
-        view.backgroundColor = .white
+        setupUI()
+        configureConstraints()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        viewModel.getAllCharactersViewModels { result in
+        viewModel.getAllCharactersViewModels { [weak self] result in
             switch result {
             case .success(let characterViewModels):
                 print(characterViewModels)
+                self?.charactersCollectionView.reloadData()
             case .failure(let error):
                 print(error)
             }
         }
+    }
+}
+
+private extension CharacterListViewController {
+    
+    func setupUI() {
+        title = "Rick and Morty"
+        view.backgroundColor = .white
+        let characterCellClass = CharacterCell.self;
+        charactersCollectionView.register(characterCellClass, forCellWithReuseIdentifier: CharacterCell.identifier)
+        charactersCollectionView.dataSource = self
+        charactersCollectionView.delegate = self
+        charactersCollectionView.frame = view.frame
+        view.addSubview(charactersCollectionView)
+    }
+    
+    func configureConstraints() {
+        charactersCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        charactersCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        charactersCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        charactersCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        charactersCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
     }
 }
