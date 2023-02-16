@@ -12,5 +12,15 @@ struct Character: Codable {
     let name: String
     let status: String
     let location: Location
-    let image: String
+    let imageUrl: String
+    let episodes: [String]
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case status
+        case location
+        case imageUrl = "image"
+        case episodes = "episode"
+    }
 }

@@ -27,9 +27,12 @@ private extension CharacterListCoordinator {
     
     func navigateToMainCharacterList() {
         let charactersService = CharactersService()
-        let viewModel = CharacterListViewModel(charactersService: charactersService)
+        let episodesService = EpisodesService()
+        let viewModel = CharacterListViewModel(charactersService: charactersService,
+                                               episodesService: episodesService)
         let characterListVC = CharacterListViewController(viewModel: viewModel, delegate: self)
         navigationController.pushViewController(characterListVC, animated: false)
+
     }
     
     func navigateToCharacterDetails(with viewModel: CharacterViewModel) {

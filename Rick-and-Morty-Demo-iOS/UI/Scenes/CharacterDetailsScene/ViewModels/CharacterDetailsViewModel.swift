@@ -1,5 +1,5 @@
 //
-//  CharacterViewModelType.swift
+//  CharacterViewModel.swift
 //  Rick-and-Morty-Demo-iOS
 //
 //  Created by Palancica Pavel on 16.02.2023.

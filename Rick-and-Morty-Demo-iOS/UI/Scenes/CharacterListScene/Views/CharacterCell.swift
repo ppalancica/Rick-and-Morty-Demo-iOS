@@ -17,6 +17,7 @@ final class CharacterCell: UICollectionViewCell {
     lazy var nameLabel = makeNameLabel()
     lazy var locationLabel = makeLocationLabel()
     lazy var episodeLabel = makeEpisodeLabel()
+    lazy var firstEpisodeNameLabel = makeFirstEpisodeNameLabel()
     
     lazy var labelsStackView = makeLabelsStackView()
     
@@ -34,6 +35,7 @@ final class CharacterCell: UICollectionViewCell {
     func configureWithViewModel(_ viewModel: CharacterViewModelType) {
         nameLabel.text = viewModel.name
         locationLabel.text = viewModel.location
+        firstEpisodeNameLabel.text = viewModel.episode
     }
 }
 
@@ -69,8 +71,17 @@ private extension CharacterCell {
     func makeEpisodeLabel() -> UILabel {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .darkGray
+        label.textColor = .black
         label.text = "Episode"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }
+    
+    func makeFirstEpisodeNameLabel() -> UILabel {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .darkGray
+        label.text = "" // "Pilot"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }
@@ -94,6 +105,7 @@ private extension CharacterCell {
         labelsStackView.addArrangedSubview(nameLabel)
         labelsStackView.addArrangedSubview(locationLabel)
         labelsStackView.addArrangedSubview(episodeLabel)
+        labelsStackView.addArrangedSubview(firstEpisodeNameLabel)
         contentView.addSubview(labelsStackView)
     }
     
