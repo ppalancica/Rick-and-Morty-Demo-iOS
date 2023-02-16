@@ -1,15 +1,15 @@
 //
-//  CharacterListViewController.swift
+//  CharacterDetailsViewController.swift
 //  Rick-and-Morty-Demo-iOS
 //
-//  Created by Palancica Pavel on 15.02.2023.
+//  Created by Palancica Pavel on 16.02.2023.
 //
 
 import UIKit
 
-final class CharacterListViewController: UIViewController {
-    
-    let viewModel: CharacterListViewModelType
+final class CharacterDetailsViewController: UIViewController {
+
+    let viewModel: CharacterDetailsViewModelType
     
     private lazy var charactersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -24,7 +24,7 @@ final class CharacterListViewController: UIViewController {
         return collectionView
     }()
     
-    init(viewModel: CharacterListViewModelType) {
+    init(viewModel: CharacterDetailsViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -41,32 +41,17 @@ final class CharacterListViewController: UIViewController {
         setupUI()
         configureConstraints()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        viewModel.getAllCharactersViewModels { [weak self] result in
-            switch result {
-            case .success(let characterViewModels):
-                print(characterViewModels)
-                self?.charactersCollectionView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
 }
 
-private extension CharacterListViewController {
+private extension CharacterDetailsViewController {
     
     func setupUI() {
-        title = "Rick and Morty"
+        title = viewModel.navigationTitle
         view.backgroundColor = .white
-        let characterCellClass = CharacterCell.self;
-        charactersCollectionView.register(characterCellClass, forCellWithReuseIdentifier: CharacterCell.identifier)
+        let cellClass = CharacterDetailsCell.self;
+        charactersCollectionView.register(cellClass, forCellWithReuseIdentifier: CharacterDetailsCell.identifier)
         charactersCollectionView.dataSource = self
         charactersCollectionView.delegate = self
-        charactersCollectionView.frame = view.frame
         view.addSubview(charactersCollectionView)
     }
     

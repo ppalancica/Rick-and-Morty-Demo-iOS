@@ -10,31 +10,40 @@ import UIKit
 // MARK: - UICollectionViewDataSource Methods
 
 extension CharacterListViewController: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
+        
         return viewModel.charactersCount
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let characterCell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCell.identifier, for: indexPath) as! CharacterCell
-        characterCell.configureWithViewModel(viewModel.characterViewModel(at: indexPath.item)!)
-        return characterCell
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCell.identifier, for: indexPath) as! CharacterCell
+        cell.configureWithViewModel(viewModel.characterViewModel(at: indexPath.item)!)
+        return cell
     }
 }
 
 // MARK: - UICollectionViewDelegate Methods
 
 extension CharacterListViewController: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        // ...
+        
+        guard let delegate = delegate,
+              let characterViewModel = viewModel.characterViewModel(at: indexPath.item) else { return }
+        
+        delegate.didSelectCharacter(with: characterViewModel)
     }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout Methods
 
 extension CharacterListViewController: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
