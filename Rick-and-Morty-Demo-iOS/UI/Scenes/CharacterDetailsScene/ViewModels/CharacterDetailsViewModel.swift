@@ -61,13 +61,15 @@ class CharacterDetailsViewModel: CharacterDetailsViewModelType {
                 
                 switch characterResult {
                 case .success(let character):
+                    guard character.id != strongSelf.selectedCharacterViewModel.characterId else {
+                        break
+                    }
                     strongSelf.sameEpisodeCharacters.append(
                         CharacterViewModel(
                             character: character,
                             episode: strongSelf.selectedCharacterViewModel.episode
                         )
                     )
-                    break
                 case .failure(let error):
                     print(error)
                 }

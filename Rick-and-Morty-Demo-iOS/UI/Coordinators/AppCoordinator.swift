@@ -43,6 +43,19 @@ private extension AppCoordinator {
         let characterDetailsVC = CharacterDetailsViewController(viewModel: viewModel, delegate: self)
         navigationController.pushViewController(characterDetailsVC, animated: true)
     }
+    
+    func navigateToCharacterDetailsReplacingCurrentView(with viewModel: CharacterViewModelType) {
+        let charactersService = CharactersService()
+        let episodesService = EpisodesService()
+        let viewModel = CharacterDetailsViewModel(characterViewModel: viewModel,
+                                                  charactersService: charactersService,
+                                                  episodesService: episodesService)
+        let characterDetailsVC = CharacterDetailsViewController(viewModel: viewModel, delegate: self)
+        var viewControllers = navigationController.viewControllers
+        viewControllers.removeLast()
+        viewControllers.append(characterDetailsVC)
+        navigationController.viewControllers = viewControllers // Replacing last VC basically
+    }
 }
 
 // MARK: - CharacterListViewControllerDelegate Methods
@@ -61,6 +74,6 @@ extension AppCoordinator: CharacterDetailsViewControllerDelegate {
     
     func didSelectCharacter(with viewModel: CharacterViewModelType,
                             inside viewController: CharacterDetailsViewController) {
-        // Replace VC
+        navigateToCharacterDetailsReplacingCurrentView(with: viewModel)
     }
 }

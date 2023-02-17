@@ -11,6 +11,7 @@ protocol CharacterViewModelType {
     
     init(character: Character, episode: Episode)
     
+    var characterId: Int { get }
     var name: String { get }
     var location: String { get }
     var episode: Episode { get }
@@ -20,6 +21,7 @@ protocol CharacterViewModelType {
 
 struct CharacterViewModel: CharacterViewModelType {
     
+    var characterId: Int
     let name: String
     let location: String
     let episode: Episode
@@ -27,6 +29,7 @@ struct CharacterViewModel: CharacterViewModelType {
     let profileImageUrl: String
     
     init(character: Character, episode: Episode) {
+        self.characterId = character.id
         self.name = character.name
         self.location = character.location.name
         self.status = character.status
