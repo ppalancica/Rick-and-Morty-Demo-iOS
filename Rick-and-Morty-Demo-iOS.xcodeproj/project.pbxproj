@@ -34,6 +34,7 @@
 		B350101C299EB38E009CFF6E /* EpisodesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B350101B299EB38E009CFF6E /* EpisodesService.swift */; };
 		B350101E299EB3EB009CFF6E /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B350101D299EB3EB009CFF6E /* Episode.swift */; };
 		B3501020299FBEE9009CFF6E /* CollectionViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B350101F299FBEE9009CFF6E /* CollectionViewHeaderView.swift */; };
+		B39D265A299FD18200926081 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B39D2659299FD18200926081 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B39D265A299FD18200926081 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +295,9 @@
 			dependencies = (
 			);
 			name = "Rick-and-Morty-Demo-iOS";
+			packageProductDependencies = (
+				B39D2659299FD18200926081 /* Kingfisher */,
+			);
 			productName = "Rick-and-Morty-Demo-iOS";
 			productReference = B3319936299D13DC00FBA413 /* Rick-and-Morty-Demo-iOS.app */;
 			productType = "com.apple.product-type.application";
@@ -365,6 +370,9 @@
 				Base,
 			);
 			mainGroup = B331992D299D13DB00FBA413;
+			packageReferences = (
+				B39D2658299FD18200926081 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = B3319937299D13DC00FBA413 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -776,6 +784,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B39D2658299FD18200926081 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = exactVersion;
+				version = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B39D2659299FD18200926081 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B39D2658299FD18200926081 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		B3319942299D13DC00FBA413 /* Rick_and_Morty_Demo_iOS.xcdatamodeld */ = {

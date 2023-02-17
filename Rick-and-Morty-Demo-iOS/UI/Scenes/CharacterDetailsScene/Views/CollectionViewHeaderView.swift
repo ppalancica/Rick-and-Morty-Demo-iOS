@@ -39,7 +39,7 @@ private extension CollectionViewHeaderView {
     }
     
     func setupUI() {
-        backgroundColor = .lightGray
+        backgroundColor = .clear
         addSubview(titleLabel)
     }
     

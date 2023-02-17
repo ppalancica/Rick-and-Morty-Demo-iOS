@@ -107,6 +107,24 @@ extension CharacterDetailsViewController: UICollectionViewDelegate {
         
         delegate.didSelectCharacter(with: characterViewModel, inside: self)
     }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
+        switch indexPath.section {
+            case SectionType.characterDetails.rawValue:
+                guard let characterDetailsCell = cell as? CharacterDetailsCell else { return }
+                guard let profileImageUrl = URL(string: viewModel.selectedCharacterViewModel.profileImageUrl) else { return }
+                characterDetailsCell.profileImageView.kf.setImage(with: profileImageUrl)
+            case SectionType.sameEpisodeCharacters.rawValue:
+                guard let characterCell = cell as? CharacterCell else { return }
+                guard let profileImageUrlString = viewModel.sameEpisodeCharacterViewModel(at: indexPath.item)?.profileImageUrl,
+                      let profileImageUrl = URL(string: profileImageUrlString) else { return }
+                characterCell.profileImageView.kf.setImage(with: profileImageUrl)
+            default:
+                fatalError("Illegal state")
+        }
+    }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout Methods

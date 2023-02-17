@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 // MARK: - UICollectionViewDataSource Methods
 
@@ -37,6 +38,15 @@ extension CharacterListViewController: UICollectionViewDelegate {
               let characterViewModel = viewModel.characterViewModel(at: indexPath.item) else { return }
         
         delegate.didSelectCharacter(with: characterViewModel, inside: self)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
+        guard let characterCell = cell as? CharacterCell else { return }
+        guard let profileImageUrlString = viewModel.characterViewModel(at: indexPath.item)?.profileImageUrl,
+              let profileImageUrl = URL(string: profileImageUrlString) else { return }
+        characterCell.profileImageView.kf.setImage(with: profileImageUrl)
     }
 }
 
