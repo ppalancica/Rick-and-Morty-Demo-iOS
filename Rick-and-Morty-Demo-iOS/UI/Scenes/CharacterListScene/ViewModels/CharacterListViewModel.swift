@@ -49,7 +49,7 @@ class CharacterListViewModel: CharacterListViewModelType {
         charactersService.getAllCharacters { [weak self] result in
             switch result {
             case .success(let characterResponse):
-                var episodeUrlToNameMappings: [String: String] = [:]
+                var episodeInfo: [String: Episode] = [:]
                 
                 for character in characterResponse.results {
                     
@@ -61,7 +61,7 @@ class CharacterListViewModel: CharacterListViewModelType {
                     self?.episodesService.getEpisode(urlString: episodeUrlString) { episodeResult in
                         switch episodeResult {
                         case .success(let episode):
-                            episodeUrlToNameMappings[episodeUrlString] = episode.name
+                            episodeInfo[episodeUrlString] = episode
                         case .failure(let error):
                             print(error)
                         }
@@ -72,9 +72,9 @@ class CharacterListViewModel: CharacterListViewModelType {
                 
                 group.notify(queue: DispatchQueue.global()) {
                     DispatchQueue.main.async { [weak self] in
-                        self?.createViewModelsAndNavigateToMainCharacterList(
+                        self?.createCharacterViewModels(
                             characters: characterResponse.results,
-                            episodeUrlToNameMappings: episodeUrlToNameMappings,
+                            episodeInfo: episodeInfo,
                             completion: completion
                         )
                     }
@@ -87,24 +87,24 @@ class CharacterListViewModel: CharacterListViewModelType {
         }
     }
     
-    func createViewModelsAndNavigateToMainCharacterList(
+    func createCharacterViewModels(
             characters: [Character],
-            episodeUrlToNameMappings: [String: String],
+            episodeInfo: [String: Episode],
             completion: @escaping (Result<[CharacterViewModel], Error>) -> Void) {
                 
         var characterViewModels: [CharacterViewModel] = []
         
         for character in characters {
             let episodeUrl = character.episodes.first ?? ""
-            let episodeName = episodeUrlToNameMappings[episodeUrl] ?? ""
+            guard let episode = episodeInfo[episodeUrl] else {
+                continue
+            }
             let viewModel = CharacterViewModel(
                 character: character,
-                episodeName: episodeName
+                episode: episode
             )
             characterViewModels.append(viewModel)
         }
-        
-        print(characterViewModels)
         
         self.viewModels = characterViewModels
         completion(.success(characterViewModels))

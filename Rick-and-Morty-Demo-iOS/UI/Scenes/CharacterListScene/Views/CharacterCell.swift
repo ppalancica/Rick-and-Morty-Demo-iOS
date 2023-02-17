@@ -35,7 +35,7 @@ final class CharacterCell: UICollectionViewCell {
     func configureWithViewModel(_ viewModel: CharacterViewModelType) {
         nameLabel.text = viewModel.name
         locationLabel.text = viewModel.location
-        firstEpisodeNameLabel.text = viewModel.episode
+        firstEpisodeNameLabel.text = viewModel.episode.name
     }
 }
 
@@ -97,10 +97,8 @@ private extension CharacterCell {
     
     
     func setupUI() {
+        // Add image
         contentView.addSubview(profileImageView)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(locationLabel)
-        contentView.addSubview(episodeLabel)
         // Add labels to stack
         labelsStackView.addArrangedSubview(nameLabel)
         labelsStackView.addArrangedSubview(locationLabel)

@@ -9,11 +9,12 @@ import Foundation
 
 protocol CharacterViewModelType {
     
-    init(character: Character, episodeName: String)
+    init(character: Character, episode: Episode)
     
     var name: String { get }
     var location: String { get }
-    var episode: String { get }
+    var episode: Episode { get }
+    var status: String { get }
     var profileImageUrl: String { get }
 }
 
@@ -21,13 +22,15 @@ struct CharacterViewModel: CharacterViewModelType {
     
     let name: String
     let location: String
-    let episode: String
+    let episode: Episode
+    var status: String
     let profileImageUrl: String
     
-    init(character: Character, episodeName: String) {
+    init(character: Character, episode: Episode) {
         self.name = character.name
         self.location = character.location.name
+        self.status = character.status
+        self.episode = episode
         self.profileImageUrl = character.imageUrl
-        self.episode = episodeName
     }
 }

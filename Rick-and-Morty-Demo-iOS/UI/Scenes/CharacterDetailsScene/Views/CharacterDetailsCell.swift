@@ -14,9 +14,12 @@ final class CharacterDetailsCell: UICollectionViewCell {
     }
     
     lazy var profileImageView = makeProfileImageView()
-    lazy var nameLabel = makeNameLabel()
+    lazy var firstSectionLabel = makeFirstSectionLabel()
     lazy var locationLabel = makeLocationLabel()
+    lazy var secondSectionLabel = makeSecondSectionLabel()
     lazy var episodeLabel = makeEpisodeLabel()
+    lazy var thirdSectionLabel = makeThirdSectionLabel()
+    lazy var statusLabel = makeStatusLabel()
     
     lazy var labelsStackView = makeLabelsStackView()
     
@@ -32,8 +35,9 @@ final class CharacterDetailsCell: UICollectionViewCell {
     }
     
     func configureWithViewModel(_ viewModel: CharacterViewModelType) {
-        nameLabel.text = viewModel.name
-        locationLabel.text = viewModel.location
+        locationLabel.text = viewModel.name
+        episodeLabel.text = viewModel.location
+        statusLabel.text = viewModel.status
     }
 }
 
@@ -48,20 +52,33 @@ private extension CharacterDetailsCell {
         return imageView
     }
     
-    func makeNameLabel() -> UILabel {
+    // Section 1
+    
+    func makeFirstSectionLabel() -> UILabel {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = .orange
-        label.text = "" // "Eyehole Man"
+        label.text = "Last visited location:"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }
     
     func makeLocationLabel() -> UILabel {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .darkGray
         label.text = "" // "Earth (C-500A)"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }
+    
+    // Section 2
+    
+    func makeSecondSectionLabel() -> UILabel {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = .orange
+        label.text = "First seen in:"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }
@@ -70,7 +87,27 @@ private extension CharacterDetailsCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .darkGray
-        label.text = "Episode"
+        label.text = "" // "Interdimensional Cable"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }
+    
+    // Section 3
+    
+    func makeThirdSectionLabel() -> UILabel {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = .orange
+        label.text = "Status:"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }
+    
+    func makeStatusLabel() -> UILabel {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .darkGray
+        label.text = "" // "Alive"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }
@@ -84,16 +121,16 @@ private extension CharacterDetailsCell {
         return stackView
     }
     
-    
     func setupUI() {
+        // Add image
         contentView.addSubview(profileImageView)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(locationLabel)
-        contentView.addSubview(episodeLabel)
         // Add labels to stack
-        labelsStackView.addArrangedSubview(nameLabel)
+        labelsStackView.addArrangedSubview(firstSectionLabel)
         labelsStackView.addArrangedSubview(locationLabel)
+        labelsStackView.addArrangedSubview(secondSectionLabel)
         labelsStackView.addArrangedSubview(episodeLabel)
+        labelsStackView.addArrangedSubview(thirdSectionLabel)
+        labelsStackView.addArrangedSubview(statusLabel)
         contentView.addSubview(labelsStackView)
     }
     
