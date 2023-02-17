@@ -7,13 +7,25 @@
 
 import UIKit
 
+protocol CharacterDetailsCellDelegate: AnyObject {
+    
+    func bookmarkCharacter(with characterId: Int,
+                           inside cell: CharacterDetailsCell)
+}
+
 final class CharacterDetailsCell: UICollectionViewCell {
     
     static var identifier: String {
         return String(describing: self)
     }
     
+    var viewModel: CharacterViewModelType?
+    var bookmarked: Bool = false
+    weak var delegate: CharacterDetailsCellDelegate?
+    
     lazy var profileImageView = makeProfileImageView()
+    lazy var addToFavoritesButton = makeAddToFavoritesButton()
+    
     lazy var firstSectionLabel = makeFirstSectionLabel()
     lazy var locationLabel = makeLocationLabel()
     lazy var secondSectionLabel = makeSecondSectionLabel()
@@ -34,10 +46,16 @@ final class CharacterDetailsCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureWithViewModel(_ viewModel: CharacterViewModelType) {
+    func configureWithViewModel(_ viewModel: CharacterViewModelType, bookmarked: Bool) {
+        self.viewModel = viewModel
+        self.bookmarked = bookmarked
         locationLabel.text = viewModel.location
         episodeLabel.text = viewModel.episode.name
         statusLabel.text = viewModel.status
+        addToFavoritesButton.setImage(
+            UIImage(named: bookmarked ? "bookmark-filled" : "bookmark-normal"),
+            for: .normal
+        )
     }
 }
 
@@ -50,6 +68,13 @@ private extension CharacterDetailsCell {
         imageView.layer.cornerRadius = 8
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
+    }
+    
+    func makeAddToFavoritesButton() -> UIButton {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "bookmark-normal"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }
     
     // Section 1
@@ -124,6 +149,7 @@ private extension CharacterDetailsCell {
     func setupUI() {
         // Add image
         contentView.addSubview(profileImageView)
+        contentView.addSubview(addToFavoritesButton)
         // Add labels to stack
         labelsStackView.addArrangedSubview(firstSectionLabel)
         labelsStackView.addArrangedSubview(locationLabel)
@@ -132,6 +158,8 @@ private extension CharacterDetailsCell {
         labelsStackView.addArrangedSubview(thirdSectionLabel)
         labelsStackView.addArrangedSubview(statusLabel)
         contentView.addSubview(labelsStackView)
+        
+        addToFavoritesButton.addTarget(self, action: #selector(addToFavoritesButtonTapped), for: .touchUpInside)
     }
     
     func configureConstraints() {
@@ -140,10 +168,30 @@ private extension CharacterDetailsCell {
         profileImageView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         profileImageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         profileImageView.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        
+        // Add to Favorites button
+        addToFavoritesButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        addToFavoritesButton.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        addToFavoritesButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+        addToFavoritesButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        
         // Stack View
         labelsStackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         labelsStackView.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 8).isActive = true
         labelsStackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         labelsStackView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+    }
+    
+    @objc func addToFavoritesButtonTapped() {
+        guard let viewModel = viewModel, let delegate = delegate else {
+            fatalError("Illegal state")
+        }
+        // Using optimistic approach
+        bookmarked = !bookmarked
+        addToFavoritesButton.setImage(
+            UIImage(named: bookmarked ? "bookmark-filled" : "bookmark-normal"),
+            for: .normal
+        )
+        delegate.bookmarkCharacter(with: viewModel.characterId, inside: self)
     }
 }

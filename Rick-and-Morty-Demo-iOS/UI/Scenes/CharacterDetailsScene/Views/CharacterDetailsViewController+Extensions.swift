@@ -25,8 +25,10 @@ extension CharacterDetailsViewController: UICollectionViewDataSource {
         switch section {
             case SectionType.characterDetails.rawValue:
                 return 1
+            
             case SectionType.sameEpisodeCharacters.rawValue:
                 return viewModel.sameEpisodeCharacters.count
+            
             default:
                 fatalError("Illegal state")
         }
@@ -34,17 +36,27 @@ extension CharacterDetailsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         switch indexPath.section {
             case SectionType.characterDetails.rawValue:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterDetailsCell.identifier, for: indexPath) as! CharacterDetailsCell
-                cell.configureWithViewModel(viewModel.selectedCharacterViewModel)
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: CharacterDetailsCell.identifier,
+                    for: indexPath
+                ) as! CharacterDetailsCell
+                cell.configureWithViewModel(
+                    viewModel.selectedCharacterViewModel,
+                    bookmarked: viewModel.isCharacterBookmarked
+                )
                 return cell
+            
             case SectionType.sameEpisodeCharacters.rawValue:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCell.identifier, for: indexPath) as! CharacterCell
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: CharacterCell.identifier,
+                    for: indexPath
+                ) as! CharacterCell
                 let characterViewModel = viewModel.sameEpisodeCharacters[indexPath.item]
                 cell.configureWithViewModel(characterViewModel)
                 return cell
+            
             default:
                 fatalError("Illegal state")
         }
@@ -54,7 +66,6 @@ extension CharacterDetailsViewController: UICollectionViewDataSource {
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
-      
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
@@ -65,11 +76,11 @@ extension CharacterDetailsViewController: UICollectionViewDataSource {
             guard let typedHeaderView = headerView as? CollectionViewHeaderView else {
                 return headerView
             }
-
+            
             let episodeName = viewModel.selectedCharacterViewModel.episode.name
             typedHeaderView.titleLabel.text = "Also from \(episodeName)"
             return typedHeaderView
-
+            
         default:
             fatalError("Illegal state")
         }
@@ -83,8 +94,10 @@ extension CharacterDetailsViewController: UICollectionViewDataSource {
         switch section {
             case SectionType.characterDetails.rawValue:
                 headerHeight = 0.0
+            
             case SectionType.sameEpisodeCharacters.rawValue:
                 headerHeight = 60.0
+            
             default:
                 fatalError("Illegal state")
         }
@@ -116,11 +129,14 @@ extension CharacterDetailsViewController: UICollectionViewDelegate {
                 guard let characterDetailsCell = cell as? CharacterDetailsCell else { return }
                 guard let profileImageUrl = URL(string: viewModel.selectedCharacterViewModel.profileImageUrl) else { return }
                 characterDetailsCell.profileImageView.kf.setImage(with: profileImageUrl)
+                characterDetailsCell.delegate = self // For bookmarking
+            
             case SectionType.sameEpisodeCharacters.rawValue:
                 guard let characterCell = cell as? CharacterCell else { return }
                 guard let profileImageUrlString = viewModel.sameEpisodeCharacterViewModel(at: indexPath.item)?.profileImageUrl,
                       let profileImageUrl = URL(string: profileImageUrlString) else { return }
                 characterCell.profileImageView.kf.setImage(with: profileImageUrl)
+            
             default:
                 fatalError("Illegal state")
         }
@@ -139,8 +155,10 @@ extension CharacterDetailsViewController: UICollectionViewDelegateFlowLayout {
         switch indexPath.section {
         case SectionType.characterDetails.rawValue:
             cellHeight = 120
+            
         case SectionType.sameEpisodeCharacters.rawValue:
             cellHeight = 80
+        
         default:
             fatalError("Illegal state")
         }
@@ -148,3 +166,21 @@ extension CharacterDetailsViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: view.frame.size.width - 16, height: cellHeight)
     }
 }
+
+// MARK: - CharacterDetailsViewController Methods
+
+extension CharacterDetailsViewController: CharacterDetailsCellDelegate {
+    
+    func bookmarkCharacter(with characterId: Int,
+                           inside cell: CharacterDetailsCell) {
+        viewModel.bookmarkCharacter(with: characterId) { result in
+            switch result {
+            case .success(let success):
+                print("Bookmarked response: \(success)")
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+}
+

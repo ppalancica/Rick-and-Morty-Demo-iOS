@@ -11,7 +11,9 @@ protocol CharacterDetailsViewModelType {
     
     init(characterViewModel: CharacterViewModelType,
          charactersService: CharactersServiceType,
-         episodesService: EpisodesServiceType)
+         episodesService: EpisodesServiceType,
+         bookmarkService: BookmarkServiceType,
+         sessionService: SessionServiceType)
     
     var selectedCharacterViewModel: CharacterViewModelType { get }
     
@@ -19,6 +21,8 @@ protocol CharacterDetailsViewModelType {
     func sameEpisodeCharacterViewModel(at index: Int) -> CharacterViewModelType?
     
     var navigationTitle: String { get }
+    var isCharacterBookmarked: Bool { get }
+    func bookmarkCharacter(with characterId: Int, completion: (Result<Bool, Error>) -> Void)
     
     func loadSameEpisodeCharacters(completion: @escaping (Result<[CharacterViewModelType], Error>) -> Void)
 }
@@ -30,17 +34,32 @@ class CharacterDetailsViewModel: CharacterDetailsViewModelType {
     
     private let charactersService: CharactersServiceType
     private let episodesService: EpisodesServiceType
+    private let bookmarkService: BookmarkServiceType
+    private let sessionService: SessionServiceType
 
     var navigationTitle: String {
         return selectedCharacterViewModel.name
     }
     
+    var isCharacterBookmarked: Bool {
+        return bookmarkService.isCharacterBookmarked(with: selectedCharacterViewModel.characterId)
+    }
+    
+    func bookmarkCharacter(with characterId: Int, completion: (Result<Bool, Error>) -> Void) {
+        bookmarkService.bookmarkCharacter(with: characterId)
+        completion(.success(true)) // Assume it's successful for now
+    }
+    
     required init(characterViewModel: CharacterViewModelType,
-         charactersService: CharactersServiceType,
-         episodesService: EpisodesServiceType) {
+                  charactersService: CharactersServiceType,
+                  episodesService: EpisodesServiceType,
+                  bookmarkService: BookmarkServiceType,
+                  sessionService: SessionServiceType) {
         self.selectedCharacterViewModel = characterViewModel
         self.charactersService = charactersService
         self.episodesService = episodesService
+        self.bookmarkService = bookmarkService
+        self.sessionService = sessionService
     }
     
     func sameEpisodeCharacterViewModel(at index: Int) -> CharacterViewModelType? {

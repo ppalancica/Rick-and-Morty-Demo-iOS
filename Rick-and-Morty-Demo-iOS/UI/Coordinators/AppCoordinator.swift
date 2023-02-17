@@ -37,9 +37,13 @@ private extension AppCoordinator {
     func navigateToCharacterDetails(with viewModel: CharacterViewModelType) {
         let charactersService = CharactersService()
         let episodesService = EpisodesService()
+        let bookmarkService = BookmarkService()
+        let sessionService = SessionService()
         let viewModel = CharacterDetailsViewModel(characterViewModel: viewModel,
                                                   charactersService: charactersService,
-                                                  episodesService: episodesService)
+                                                  episodesService: episodesService,
+                                                  bookmarkService: bookmarkService,
+                                                  sessionService: sessionService)
         let characterDetailsVC = CharacterDetailsViewController(viewModel: viewModel, delegate: self)
         navigationController.pushViewController(characterDetailsVC, animated: true)
     }
@@ -47,9 +51,13 @@ private extension AppCoordinator {
     func navigateToCharacterDetailsReplacingCurrentView(with viewModel: CharacterViewModelType) {
         let charactersService = CharactersService()
         let episodesService = EpisodesService()
+        let bookmarkService = BookmarkService()
+        let sessionService = SessionService()
         let viewModel = CharacterDetailsViewModel(characterViewModel: viewModel,
                                                   charactersService: charactersService,
-                                                  episodesService: episodesService)
+                                                  episodesService: episodesService,
+                                                  bookmarkService: bookmarkService,
+                                                  sessionService: sessionService)
         let characterDetailsVC = CharacterDetailsViewController(viewModel: viewModel, delegate: self)
         var viewControllers = navigationController.viewControllers
         viewControllers.removeLast()
