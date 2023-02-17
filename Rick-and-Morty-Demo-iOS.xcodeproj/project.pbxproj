@@ -16,7 +16,7 @@
 		B3319960299D13DD00FBA413 /* Rick_and_Morty_Demo_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331995F299D13DD00FBA413 /* Rick_and_Morty_Demo_iOSUITestsLaunchTests.swift */; };
 		B3319974299D1CBF00FBA413 /* CharacterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3319973299D1CBF00FBA413 /* CharacterListViewController.swift */; };
 		B331997B299D1F6700FBA413 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331997A299D1F6700FBA413 /* Coordinator.swift */; };
-		B331997D299D1FEB00FBA413 /* CharacterListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331997C299D1FEB00FBA413 /* CharacterListCoordinator.swift */; };
+		B331997D299D1FEB00FBA413 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331997C299D1FEB00FBA413 /* AppCoordinator.swift */; };
 		B331997F299D235F00FBA413 /* CharacterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331997E299D235F00FBA413 /* CharacterListViewModel.swift */; };
 		B3319981299D24DF00FBA413 /* CharactersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3319980299D24DF00FBA413 /* CharactersService.swift */; };
 		B3319983299D251B00FBA413 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3319982299D251B00FBA413 /* Character.swift */; };
@@ -66,7 +66,7 @@
 		B331995F299D13DD00FBA413 /* Rick_and_Morty_Demo_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rick_and_Morty_Demo_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B3319973299D1CBF00FBA413 /* CharacterListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListViewController.swift; sourceTree = "<group>"; };
 		B331997A299D1F6700FBA413 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		B331997C299D1FEB00FBA413 /* CharacterListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListCoordinator.swift; sourceTree = "<group>"; };
+		B331997C299D1FEB00FBA413 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		B331997E299D235F00FBA413 /* CharacterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListViewModel.swift; sourceTree = "<group>"; };
 		B3319980299D24DF00FBA413 /* CharactersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersService.swift; sourceTree = "<group>"; };
 		B3319982299D251B00FBA413 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
@@ -223,7 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				B331997A299D1F6700FBA413 /* Coordinator.swift */,
-				B331997C299D1FEB00FBA413 /* CharacterListCoordinator.swift */,
+				B331997C299D1FEB00FBA413 /* AppCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -405,7 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3319983299D251B00FBA413 /* Character.swift in Sources */,
-				B331997D299D1FEB00FBA413 /* CharacterListCoordinator.swift in Sources */,
+				B331997D299D1FEB00FBA413 /* AppCoordinator.swift in Sources */,
 				B3319996299D483B00FBA413 /* Location.swift in Sources */,
 				B3319992299D3EEF00FBA413 /* CharacterListViewController+Extensions.swift in Sources */,
 				B331998F299D3E3400FBA413 /* CharacterCell.swift in Sources */,

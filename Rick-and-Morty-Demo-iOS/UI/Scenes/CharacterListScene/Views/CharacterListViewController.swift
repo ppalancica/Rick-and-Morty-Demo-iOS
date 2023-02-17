@@ -9,7 +9,8 @@ import UIKit
 
 protocol CharacterListViewControllerDelegate: AnyObject {
     
-    func didSelectCharacter(with viewModel: CharacterViewModel)
+    func didSelectCharacter(with viewModel: CharacterViewModelType,
+                            inside viewController: CharacterListViewController)
 }
 
 final class CharacterListViewController: UIViewController {

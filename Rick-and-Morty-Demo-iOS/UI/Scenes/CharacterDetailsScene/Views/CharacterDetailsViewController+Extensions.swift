@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - UICollectionViewDataSource Methods
 
-enum SectionType: Int {
+fileprivate enum SectionType: Int {
     case characterDetails
     case sameEpisodeCharacters
 }
@@ -28,7 +28,7 @@ extension CharacterDetailsViewController: UICollectionViewDataSource {
             case SectionType.sameEpisodeCharacters.rawValue:
                 return viewModel.sameEpisodeCharacters.count
             default:
-                return 0
+                fatalError("Illegal state")
         }
     }
     
@@ -57,6 +57,13 @@ extension CharacterDetailsViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        
+        guard indexPath.section == 1 else { return }
+        
+        guard let delegate = delegate,
+              let characterViewModel = viewModel.sameEpisodeCharacterViewModel(at: indexPath.item) else { return }
+        
+        delegate.didSelectCharacter(with: characterViewModel, inside: self)
     }
 }
 

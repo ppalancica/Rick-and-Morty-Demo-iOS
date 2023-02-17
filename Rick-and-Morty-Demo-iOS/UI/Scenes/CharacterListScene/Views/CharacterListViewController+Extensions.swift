@@ -36,7 +36,7 @@ extension CharacterListViewController: UICollectionViewDelegate {
         guard let delegate = delegate,
               let characterViewModel = viewModel.characterViewModel(at: indexPath.item) else { return }
         
-        delegate.didSelectCharacter(with: characterViewModel)
+        delegate.didSelectCharacter(with: characterViewModel, inside: self)
     }
 }
 

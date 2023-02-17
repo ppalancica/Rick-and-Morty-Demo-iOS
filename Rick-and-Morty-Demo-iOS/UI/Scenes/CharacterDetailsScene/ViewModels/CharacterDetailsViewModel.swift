@@ -14,7 +14,9 @@ protocol CharacterDetailsViewModelType {
          episodesService: EpisodesServiceType)
     
     var selectedCharacterViewModel: CharacterViewModelType { get }
+    
     var sameEpisodeCharacters: [CharacterViewModelType] { get }
+    func sameEpisodeCharacterViewModel(at index: Int) -> CharacterViewModelType?
     
     var navigationTitle: String { get }
     
@@ -39,6 +41,13 @@ class CharacterDetailsViewModel: CharacterDetailsViewModelType {
         self.selectedCharacterViewModel = characterViewModel
         self.charactersService = charactersService
         self.episodesService = episodesService
+    }
+    
+    func sameEpisodeCharacterViewModel(at index: Int) -> CharacterViewModelType? {
+        guard index >= 0 && index < sameEpisodeCharacters.count else {
+            return nil
+        }
+        return sameEpisodeCharacters[index]
     }
     
     func loadSameEpisodeCharacters(completion: @escaping (Result<[CharacterViewModelType], Error>) -> Void) {

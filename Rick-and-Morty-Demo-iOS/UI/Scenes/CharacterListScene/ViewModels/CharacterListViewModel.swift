@@ -11,18 +11,18 @@ protocol CharacterListViewModelType {
     
     init(charactersService: CharactersServiceType, episodesService: EpisodesServiceType)
     
-    var viewModels: [CharacterViewModel] { get }
+    var viewModels: [CharacterViewModelType] { get }
     var charactersCount: Int { get }
     
     func getAllCharactersViewModels(completion: @escaping (Result<[CharacterViewModel], Error>) -> Void)
-    func characterViewModel(at index: Int) -> CharacterViewModel?
+    func characterViewModel(at index: Int) -> CharacterViewModelType?
 }
 
 class CharacterListViewModel: CharacterListViewModelType {
     
     private let charactersService: CharactersServiceType
     private let episodesService: EpisodesServiceType
-    private(set) var viewModels: [CharacterViewModel] = []
+    private(set) var viewModels: [CharacterViewModelType] = []
     var charactersCount: Int { return viewModels.count }
 
     required init(charactersService: CharactersServiceType, episodesService: EpisodesServiceType) {
@@ -110,7 +110,7 @@ class CharacterListViewModel: CharacterListViewModelType {
         completion(.success(characterViewModels))
     }
     
-    func characterViewModel(at index: Int) -> CharacterViewModel? {
+    func characterViewModel(at index: Int) -> CharacterViewModelType? {
         guard index >= 0 && index < viewModels.count else {
             return nil
         }

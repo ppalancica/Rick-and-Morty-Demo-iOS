@@ -7,9 +7,16 @@
 
 import UIKit
 
+protocol CharacterDetailsViewControllerDelegate: AnyObject {
+    
+    func didSelectCharacter(with viewModel: CharacterViewModelType,
+                            inside viewController: CharacterDetailsViewController)
+}
+
 final class CharacterDetailsViewController: UIViewController {
 
     let viewModel: CharacterDetailsViewModelType
+    weak var delegate: CharacterDetailsViewControllerDelegate?
     
     private lazy var charactersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -24,8 +31,9 @@ final class CharacterDetailsViewController: UIViewController {
         return collectionView
     }()
     
-    init(viewModel: CharacterDetailsViewModelType) {
+    init(viewModel: CharacterDetailsViewModelType, delegate: CharacterDetailsViewControllerDelegate) {
         self.viewModel = viewModel
+        self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
     }
     

@@ -12,7 +12,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var coordinator: CharacterListCoordinator?
+    var coordinator: AppCoordinator?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = UINavigationController()
         navigationController.navigationBar.prefersLargeTitles = true
         
-        let coordinator = CharacterListCoordinator(navigationController: navigationController)
+        let coordinator = AppCoordinator(navigationController: navigationController)
         coordinator.start()
         self.coordinator = coordinator
         

@@ -1,5 +1,5 @@
 //
-//  CharacterListCoordinator.swift
+//  AppCoordinator.swift
 //  Rick-and-Morty-Demo-iOS
 //
 //  Created by Palancica Pavel on 15.02.2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CharacterListCoordinator: Coordinator {
+class AppCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
@@ -23,7 +23,7 @@ class CharacterListCoordinator: Coordinator {
 
 // MARK: - Private Methods
 
-private extension CharacterListCoordinator {
+private extension AppCoordinator {
     
     func navigateToMainCharacterList() {
         let charactersService = CharactersService()
@@ -34,22 +34,33 @@ private extension CharacterListCoordinator {
         navigationController.viewControllers = [characterListVC]
     }
     
-    func navigateToCharacterDetails(with viewModel: CharacterViewModel) {
+    func navigateToCharacterDetails(with viewModel: CharacterViewModelType) {
         let charactersService = CharactersService()
         let episodesService = EpisodesService()
         let viewModel = CharacterDetailsViewModel(characterViewModel: viewModel,
                                                   charactersService: charactersService,
                                                   episodesService: episodesService)
-        let characterDetailsVC = CharacterDetailsViewController(viewModel: viewModel)
+        let characterDetailsVC = CharacterDetailsViewController(viewModel: viewModel, delegate: self)
         navigationController.pushViewController(characterDetailsVC, animated: true)
     }
 }
 
 // MARK: - CharacterListViewControllerDelegate Methods
 
-extension CharacterListCoordinator: CharacterListViewControllerDelegate {
+extension AppCoordinator: CharacterListViewControllerDelegate {
  
-    func didSelectCharacter(with viewModel: CharacterViewModel) {
+    func didSelectCharacter(with viewModel: CharacterViewModelType,
+                            inside viewController: CharacterListViewController) {
         navigateToCharacterDetails(with: viewModel)
+    }
+}
+
+// MARK: - CharacterDetailsViewController Methods
+
+extension AppCoordinator: CharacterDetailsViewControllerDelegate {
+    
+    func didSelectCharacter(with viewModel: CharacterViewModelType,
+                            inside viewController: CharacterDetailsViewController) {
+        // Replace VC
     }
 }
