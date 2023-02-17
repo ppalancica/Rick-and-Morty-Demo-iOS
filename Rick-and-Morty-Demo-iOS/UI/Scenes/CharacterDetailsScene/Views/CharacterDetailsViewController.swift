@@ -40,6 +40,10 @@ final class CharacterDetailsViewController: UIViewController {
         
         setupUI()
         configureConstraints()
+        
+        viewModel.loadSameEpisodeCharacters { [weak self] result in
+            self?.charactersCollectionView.reloadData()
+        }
     }
 }
 

@@ -9,19 +9,45 @@ import UIKit
 
 // MARK: - UICollectionViewDataSource Methods
 
+enum SectionType: Int {
+    case characterDetails
+    case sameEpisodeCharacters
+}
+
 extension CharacterDetailsViewController: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return viewModel.sameEpisodeCharacters.count > 0 ? 2 : 1
+    }
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return 1
+        switch section {
+            case SectionType.characterDetails.rawValue:
+                return 1
+            case SectionType.sameEpisodeCharacters.rawValue:
+                return viewModel.sameEpisodeCharacters.count
+            default:
+                return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterDetailsCell.identifier, for: indexPath) as! CharacterDetailsCell
-        cell.configureWithViewModel(viewModel.selectedCharacterViewModel)
-        return cell
+        switch indexPath.section {
+            case SectionType.characterDetails.rawValue:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterDetailsCell.identifier, for: indexPath) as! CharacterDetailsCell
+                cell.configureWithViewModel(viewModel.selectedCharacterViewModel)
+                return cell
+            case SectionType.sameEpisodeCharacters.rawValue:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCell.identifier, for: indexPath) as! CharacterCell
+                let characterViewModel = viewModel.sameEpisodeCharacters[indexPath.item]
+                cell.configureWithViewModel(characterViewModel)
+                return cell
+            default:
+                fatalError("Illegal state")
+        }
     }
 }
 
@@ -41,6 +67,17 @@ extension CharacterDetailsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.size.width - 16, height: 120)
+        let cellHeight: CGFloat
+        
+        switch indexPath.section {
+        case SectionType.characterDetails.rawValue:
+            cellHeight = 120
+        case SectionType.sameEpisodeCharacters.rawValue:
+            cellHeight = 80
+        default:
+            fatalError("Illegal state")
+        }
+        
+        return CGSize(width: view.frame.size.width - 16, height: cellHeight)
     }
 }

@@ -35,7 +35,11 @@ private extension CharacterListCoordinator {
     }
     
     func navigateToCharacterDetails(with viewModel: CharacterViewModel) {
-        let viewModel = CharacterDetailsViewModel(characterViewModel: viewModel)
+        let charactersService = CharactersService()
+        let episodesService = EpisodesService()
+        let viewModel = CharacterDetailsViewModel(characterViewModel: viewModel,
+                                                  charactersService: charactersService,
+                                                  episodesService: episodesService)
         let characterDetailsVC = CharacterDetailsViewController(viewModel: viewModel)
         navigationController.pushViewController(characterDetailsVC, animated: true)
     }

@@ -108,11 +108,6 @@ class CharacterListViewModel: CharacterListViewModelType {
         
         self.viewModels = characterViewModels
         completion(.success(characterViewModels))
-        
-//        let charactersService = CharactersService()
-//        let viewModel = CharacterListViewModel(viewModels: characterViewModels)
-//        let characterListVC = CharacterListViewController(viewModel: viewModel, delegate: self)
-//        navigationController.pushViewController(characterListVC, animated: false)
     }
     
     func characterViewModel(at index: Int) -> CharacterViewModel? {

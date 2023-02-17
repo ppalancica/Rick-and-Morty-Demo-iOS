@@ -10,4 +10,11 @@ import Foundation
 struct Episode: Codable {
     let id: Int
     let name: String
+    let charactersUrls: [String]
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case charactersUrls = "characters"
+    }
 }
