@@ -35,8 +35,8 @@ final class CharacterDetailsCell: UICollectionViewCell {
     }
     
     func configureWithViewModel(_ viewModel: CharacterViewModelType) {
-        locationLabel.text = viewModel.name
-        episodeLabel.text = viewModel.location
+        locationLabel.text = viewModel.location
+        episodeLabel.text = viewModel.episode.name
         statusLabel.text = viewModel.status
     }
 }

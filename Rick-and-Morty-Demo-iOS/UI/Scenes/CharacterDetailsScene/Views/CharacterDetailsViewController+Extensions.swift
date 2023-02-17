@@ -49,6 +49,48 @@ extension CharacterDetailsViewController: UICollectionViewDataSource {
                 fatalError("Illegal state")
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+      
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: CollectionViewHeaderView.identifier,
+                for: indexPath
+            )
+            
+            guard let typedHeaderView = headerView as? CollectionViewHeaderView else {
+                return headerView
+            }
+
+            let episodeName = viewModel.selectedCharacterViewModel.episode.name
+            typedHeaderView.titleLabel.text = "Also from \(episodeName)"
+            return typedHeaderView
+
+        default:
+            fatalError("Illegal state")
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let headerHeight: CGFloat
+        
+        switch section {
+            case SectionType.characterDetails.rawValue:
+                headerHeight = 0.0
+            case SectionType.sameEpisodeCharacters.rawValue:
+                headerHeight = 60.0
+            default:
+                fatalError("Illegal state")
+        }
+        
+        return CGSize(width: collectionView.frame.width, height: headerHeight)
+    }
 }
 
 // MARK: - UICollectionViewDelegate Methods

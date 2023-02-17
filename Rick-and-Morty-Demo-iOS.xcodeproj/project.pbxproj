@@ -33,6 +33,7 @@
 		B350101A299E8B27009CFF6E /* CharacterDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3501019299E8B27009CFF6E /* CharacterDetailsCell.swift */; };
 		B350101C299EB38E009CFF6E /* EpisodesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B350101B299EB38E009CFF6E /* EpisodesService.swift */; };
 		B350101E299EB3EB009CFF6E /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B350101D299EB3EB009CFF6E /* Episode.swift */; };
+		B3501020299FBEE9009CFF6E /* CollectionViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B350101F299FBEE9009CFF6E /* CollectionViewHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		B3501019299E8B27009CFF6E /* CharacterDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailsCell.swift; sourceTree = "<group>"; };
 		B350101B299EB38E009CFF6E /* EpisodesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesService.swift; sourceTree = "<group>"; };
 		B350101D299EB3EB009CFF6E /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
+		B350101F299FBEE9009CFF6E /* CollectionViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +264,7 @@
 				B3501019299E8B27009CFF6E /* CharacterDetailsCell.swift */,
 				B3501011299E7AA3009CFF6E /* CharacterDetailsViewController.swift */,
 				B3501017299E8AEA009CFF6E /* CharacterDetailsViewController+Extensions.swift */,
+				B350101F299FBEE9009CFF6E /* CollectionViewHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				B331998F299D3E3400FBA413 /* CharacterCell.swift in Sources */,
 				B3319985299D31F400FBA413 /* Info.swift in Sources */,
 				B331993A299D13DC00FBA413 /* AppDelegate.swift in Sources */,
+				B3501020299FBEE9009CFF6E /* CollectionViewHeaderView.swift in Sources */,
 				B3501018299E8AEA009CFF6E /* CharacterDetailsViewController+Extensions.swift in Sources */,
 				B350101A299E8B27009CFF6E /* CharacterDetailsCell.swift in Sources */,
 				B3319981299D24DF00FBA413 /* CharactersService.swift in Sources */,

@@ -26,7 +26,17 @@ final class CharacterDetailsViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.collectionViewLayout = layout
         collectionView.backgroundColor = .white
-        collectionView.register(CharacterCell.self, forCellWithReuseIdentifier: CharacterCell.identifier)
+        
+        collectionView.register(
+            CharacterCell.self,
+            forCellWithReuseIdentifier: CharacterCell.identifier
+        )
+        
+        collectionView.register(
+            CollectionViewHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: CollectionViewHeaderView.identifier
+        )
         
         return collectionView
     }()
