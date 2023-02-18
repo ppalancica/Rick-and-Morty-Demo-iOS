@@ -13,12 +13,13 @@ protocol SignupViewControllerDelegate: AnyObject {
                       password: String,
                       inside viewController: SignupViewController)
     
-    func didTapSignup(inside viewController: SignupViewController)
+    func didTapSignin(inside viewController: SignupViewController)
 }
 
 final class SignupViewController: UIViewController {
     
     weak var delegate: SignupViewControllerDelegate?
+    private let sessionService: SessionServiceType
     
     lazy var scrollView = makeScrollView()
     lazy var rootStackView = makeRootStackView()
@@ -41,8 +42,9 @@ final class SignupViewController: UIViewController {
         fatalError("init has not been implemented")
     }
     
-    init(delegate: SignupViewControllerDelegate) {
+    init(sessionService: SessionServiceType, delegate: SignupViewControllerDelegate) {
         self.delegate = delegate
+        self.sessionService = sessionService
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -91,7 +93,7 @@ private extension SignupViewController {
     }
     
     @objc func handleSigninButtonTap() {
-        delegate?.didTapSignup(inside: self)
+        delegate?.didTapSignin(inside: self)
     }
 }
 

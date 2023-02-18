@@ -66,21 +66,36 @@ private extension AppCoordinator {
 
 private extension AppCoordinator {
     
-    func navigateToAccountSignup() {
-        let signupVC = SignupViewController(delegate: self)
-        navigationController.pushViewController(signupVC, animated: true)
-    }
+//    func navigateToAccountSignup() {
+//        let signupVC = SignupViewController(sessionService: sessionService, delegate: self)
+//        navigationController.pushViewController(signupVC, animated: true)
+//    }
     
     func navigateToAccountSignin() {
-        let signinVC = SigninViewController(delegate: self)
+        let signinVC = SigninViewController(sessionService: sessionService, delegate: self)
         navigationController.pushViewController(signinVC, animated: true)
+    }
+    
+    func navigateToAccountSignupReplacingCurrentView() {
+        let signupVC = SignupViewController(sessionService: sessionService, delegate: self)
+        var viewControllers = navigationController.viewControllers
+        viewControllers.removeLast()
+        viewControllers.append(signupVC)
+        navigationController.viewControllers = viewControllers // Replacing last VC basically
+    }
+    
+    func navigateToAccountSigninReplacingCurrentView() {
+        let signinVC = SigninViewController(sessionService: sessionService, delegate: self)
+        var viewControllers = navigationController.viewControllers
+        viewControllers.removeLast()
+        viewControllers.append(signinVC)
+        navigationController.viewControllers = viewControllers // Replacing last VC basically
     }
     
     func navigateToAccountDetails() {
         
     }
 }
-
 
 // MARK: - CharacterListViewControllerDelegate Methods
 
@@ -95,8 +110,7 @@ extension AppCoordinator: CharacterListViewControllerDelegate {
         if sessionService.isUserLoggedIn {
             navigateToAccountDetails()
         } else {
-//            navigateToAccountSignin()
-            navigateToAccountSignup()
+            navigateToAccountSignin()
         }
     }
 }
@@ -119,8 +133,8 @@ extension AppCoordinator: SignupViewControllerDelegate {
         
     }
     
-    func didTapSignup(inside viewController: SignupViewController) {
-        
+    func didTapSignin(inside viewController: SignupViewController) {
+        navigateToAccountSigninReplacingCurrentView()
     }
 }
 
@@ -135,6 +149,6 @@ extension AppCoordinator: SigninViewControllerDelegate {
     }
     
     func didTapSignup(inside viewController: SigninViewController) {
-        // Switch to Signup View
+        navigateToAccountSignupReplacingCurrentView()
     }
 }
