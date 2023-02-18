@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class AppCoordinator: Coordinator {
     
@@ -72,12 +71,12 @@ private extension AppCoordinator {
 //    }
     
     func navigateToAccountSignin() {
-        let signinVC = SigninViewController(sessionService: sessionService, delegate: self)
+        let signinVC = SigninViewController(delegate: self)
         navigationController.pushViewController(signinVC, animated: true)
     }
     
     func navigateToAccountSignupReplacingCurrentView() {
-        let signupVC = SignupViewController(sessionService: sessionService, delegate: self)
+        let signupVC = SignupViewController(delegate: self)
         var viewControllers = navigationController.viewControllers
         viewControllers.removeLast()
         viewControllers.append(signupVC)
@@ -85,15 +84,24 @@ private extension AppCoordinator {
     }
     
     func navigateToAccountSigninReplacingCurrentView() {
-        let signinVC = SigninViewController(sessionService: sessionService, delegate: self)
+        let signinVC = SigninViewController(delegate: self)
         var viewControllers = navigationController.viewControllers
         viewControllers.removeLast()
         viewControllers.append(signinVC)
         navigationController.viewControllers = viewControllers // Replacing last VC basically
     }
     
-    func navigateToAccountDetails() {
-        
+    func navigateToUserProfile(userProfile: UserProfile) {
+        let userProfileVC = UserProfileViewController(email: userProfile.email)
+        navigationController.pushViewController(userProfileVC, animated: true)
+    }
+    
+    func navigateToUserProfileReplacingCurrentView(userProfile: UserProfile) {
+        let userProfileVC = UserProfileViewController(email: userProfile.email)
+        var viewControllers = navigationController.viewControllers
+        viewControllers.removeLast()
+        viewControllers.append(userProfileVC)
+        navigationController.viewControllers = viewControllers // Replacing last VC basically
     }
 }
 
@@ -108,7 +116,8 @@ extension AppCoordinator: CharacterListViewControllerDelegate {
     
     func didTapUserAccountButton(inside viewController: CharacterListViewController) {
         if sessionService.isUserLoggedIn {
-            navigateToAccountDetails()
+            guard let userProfile = sessionService.userProfile else { return }
+            navigateToUserProfile(userProfile: userProfile)
         } else {
             navigateToAccountSignin()
         }
@@ -129,8 +138,18 @@ extension AppCoordinator: CharacterDetailsViewControllerDelegate {
 
 extension AppCoordinator: SignupViewControllerDelegate {
     
-    func didTapSignup(email: String, password: String, inside viewController: SignupViewController) {
-        
+    func didTapSignup(email: String,
+                      password: String,
+                      inside viewController: SignupViewController) {
+        sessionService.createUser(withEmail: email, password: password) { [weak self] result in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success(let userProfile):
+                strongSelf.navigateToUserProfileReplacingCurrentView(userProfile: userProfile)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     func didTapSignin(inside viewController: SignupViewController) {
@@ -145,7 +164,16 @@ extension AppCoordinator: SigninViewControllerDelegate {
     func didTapSignin(email: String,
                       password: String,
                       inside viewController: SigninViewController) {
-        
+        sessionService.signIn(withEmail: email, password: password) { [weak self] result in
+            guard let strongSelf = self else { return }
+            switch result {
+            case .success(let userProfile):
+                strongSelf.navigateToUserProfileReplacingCurrentView(userProfile: userProfile)
+            case .failure(let error):
+                print(error)
+            }
+        }
+        //navigateToUserProfileReplacingCurrentView(userProfile: UserProfile(email: "pavel001@gmail.com"))
     }
     
     func didTapSignup(inside viewController: SigninViewController) {

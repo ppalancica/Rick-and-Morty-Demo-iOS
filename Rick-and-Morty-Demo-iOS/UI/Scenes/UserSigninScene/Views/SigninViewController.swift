@@ -19,7 +19,6 @@ protocol SigninViewControllerDelegate: AnyObject {
 final class SigninViewController: UIViewController {
     
     weak var delegate: SigninViewControllerDelegate?
-    private let sessionService: SessionServiceType
     
     lazy var scrollView = makeScrollView()
     lazy var rootStackView = makeRootStackView()
@@ -38,13 +37,8 @@ final class SigninViewController: UIViewController {
     lazy var signupLabel = makeSignupLabel()
     lazy var signupButton = makeSignupButton()
     
-    private init() {
-        fatalError("init has not been implemented")
-    }
-    
-    init(sessionService: SessionServiceType, delegate: SigninViewControllerDelegate) {
+    init(delegate: SigninViewControllerDelegate) {
         self.delegate = delegate
-        self.sessionService = sessionService
         super.init(nibName: nil, bundle: nil)
     }
     

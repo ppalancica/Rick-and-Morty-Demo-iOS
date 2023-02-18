@@ -41,6 +41,8 @@
 		B39D266729A0D54B00926081 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39D266629A0D54B00926081 /* FirebaseAuth */; };
 		B39D266B29A0E15200926081 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D266A29A0E15200926081 /* SigninViewController.swift */; };
 		B39D267229A0F68300926081 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D267129A0F68300926081 /* SignupViewController.swift */; };
+		B39D267629A128AB00926081 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D267529A128AB00926081 /* UserProfileViewController.swift */; };
+		B39D267829A131EC00926081 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D267729A131EC00926081 /* UserProfile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +99,8 @@
 		B39D266329A0D37E00926081 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B39D266A29A0E15200926081 /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		B39D267129A0F68300926081 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		B39D267529A128AB00926081 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		B39D267729A131EC00926081 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,11 +196,8 @@
 		B331996D299D1BF300FBA413 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B3319982299D251B00FBA413 /* Character.swift */,
-				B3319986299D327F00FBA413 /* CharacterPage.swift */,
-				B350101D299EB3EB009CFF6E /* Episode.swift */,
-				B3319984299D31F400FBA413 /* Info.swift */,
-				B3319995299D483B00FBA413 /* Location.swift */,
+				B39D267A29A1388300926081 /* Cached Data */,
+				B39D267929A1384200926081 /* Remote Data */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -221,6 +222,7 @@
 		B3319970299D1C2800FBA413 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				B39D267429A1288C00926081 /* UserProfileScene */,
 				B39D266929A0E12E00926081 /* UserSigninScene */,
 				B39D266829A0E10F00926081 /* UserSignupScene */,
 				B3319971299D1C2E00FBA413 /* CharacterListScene */,
@@ -350,6 +352,34 @@
 				B39D266A29A0E15200926081 /* SigninViewController.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		B39D267429A1288C00926081 /* UserProfileScene */ = {
+			isa = PBXGroup;
+			children = (
+				B39D267529A128AB00926081 /* UserProfileViewController.swift */,
+			);
+			path = UserProfileScene;
+			sourceTree = "<group>";
+		};
+		B39D267929A1384200926081 /* Remote Data */ = {
+			isa = PBXGroup;
+			children = (
+				B3319982299D251B00FBA413 /* Character.swift */,
+				B3319986299D327F00FBA413 /* CharacterPage.swift */,
+				B350101D299EB3EB009CFF6E /* Episode.swift */,
+				B3319984299D31F400FBA413 /* Info.swift */,
+				B3319995299D483B00FBA413 /* Location.swift */,
+			);
+			path = "Remote Data";
+			sourceTree = "<group>";
+		};
+		B39D267A29A1388300926081 /* Cached Data */ = {
+			isa = PBXGroup;
+			children = (
+				B39D267729A131EC00926081 /* UserProfile.swift */,
+			);
+			path = "Cached Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -507,6 +537,8 @@
 				B331997F299D235F00FBA413 /* CharacterListViewModel.swift in Sources */,
 				B3319987299D327F00FBA413 /* CharacterPage.swift in Sources */,
 				B331997B299D1F6700FBA413 /* Coordinator.swift in Sources */,
+				B39D267829A131EC00926081 /* UserProfile.swift in Sources */,
+				B39D267629A128AB00926081 /* UserProfileViewController.swift in Sources */,
 				B3501012299E7AA3009CFF6E /* CharacterDetailsViewController.swift in Sources */,
 				B3319974299D1CBF00FBA413 /* CharacterListViewController.swift in Sources */,
 				B3319989299D356000FBA413 /* CharacterViewModel.swift in Sources */,
