@@ -37,6 +37,8 @@
 		B39D265A299FD18200926081 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B39D2659299FD18200926081 /* Kingfisher */; };
 		B39D265F299FE1DC00926081 /* BookmarkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D265E299FE1DC00926081 /* BookmarkService.swift */; };
 		B39D2662299FE3A100926081 /* SessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D2661299FE3A100926081 /* SessionService.swift */; };
+		B39D266429A0D37E00926081 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B39D266329A0D37E00926081 /* GoogleService-Info.plist */; };
+		B39D266729A0D54B00926081 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39D266629A0D54B00926081 /* FirebaseAuth */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +92,7 @@
 		B350101F299FBEE9009CFF6E /* CollectionViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeaderView.swift; sourceTree = "<group>"; };
 		B39D265E299FE1DC00926081 /* BookmarkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkService.swift; sourceTree = "<group>"; };
 		B39D2661299FE3A100926081 /* SessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionService.swift; sourceTree = "<group>"; };
+		B39D266329A0D37E00926081 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +101,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B39D265A299FD18200926081 /* Kingfisher in Frameworks */,
+				B39D266729A0D54B00926081 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +145,7 @@
 		B3319938299D13DC00FBA413 /* Rick-and-Morty-Demo-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				B39D266329A0D37E00926081 /* GoogleService-Info.plist */,
 				B3319939299D13DC00FBA413 /* AppDelegate.swift */,
 				B331996F299D1C0F00FBA413 /* Persistence */,
 				B331996E299D1C0000FBA413 /* Services */,
@@ -327,6 +332,7 @@
 			name = "Rick-and-Morty-Demo-iOS";
 			packageProductDependencies = (
 				B39D2659299FD18200926081 /* Kingfisher */,
+				B39D266629A0D54B00926081 /* FirebaseAuth */,
 			);
 			productName = "Rick-and-Morty-Demo-iOS";
 			productReference = B3319936299D13DC00FBA413 /* Rick-and-Morty-Demo-iOS.app */;
@@ -402,6 +408,7 @@
 			mainGroup = B331992D299D13DB00FBA413;
 			packageReferences = (
 				B39D2658299FD18200926081 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				B39D266529A0D54B00926081 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = B3319937299D13DC00FBA413 /* Products */;
 			projectDirPath = "";
@@ -421,6 +428,7 @@
 			files = (
 				B3319949299D13DD00FBA413 /* LaunchScreen.storyboard in Resources */,
 				B3319946299D13DD00FBA413 /* Assets.xcassets in Resources */,
+				B39D266429A0D37E00926081 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,6 +834,14 @@
 				version = 7.0.0;
 			};
 		};
+		B39D266529A0D54B00926081 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -833,6 +849,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B39D2658299FD18200926081 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		B39D266629A0D54B00926081 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B39D266529A0D54B00926081 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 

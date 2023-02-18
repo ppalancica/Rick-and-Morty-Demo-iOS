@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 protocol CharacterListViewControllerDelegate: AnyObject {
     
@@ -17,6 +18,7 @@ final class CharacterListViewController: UIViewController {
     
     public let viewModel: CharacterListViewModelType
     weak var delegate: CharacterListViewControllerDelegate?
+    var handle: AuthStateDidChangeListenerHandle?
     
     private lazy var charactersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -50,8 +52,8 @@ final class CharacterListViewController: UIViewController {
         configureConstraints()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         viewModel.getAllCharactersViewModels { [weak self] result in
             switch result {
@@ -62,6 +64,18 @@ final class CharacterListViewController: UIViewController {
                 print(error)
             }
         }
+        
+        handle = Auth.auth().addStateDidChangeListener { auth, user in
+            // reload/refresh UI
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if handle != nil {
+            Auth.auth().removeStateDidChangeListener(handle!)
+        }
     }
 }
 
@@ -70,6 +84,12 @@ private extension CharacterListViewController {
     func setupUI() {
         title = "Rick and Morty"
         view.backgroundColor = .white
+        // let userImage = UIImage(named: "user-circle-fill")
+        let userButton = UIBarButtonItem(title: "Account", // image: userImage
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(accountButtonTapped))
+        navigationItem.leftBarButtonItem = userButton
         let cellClass = CharacterCell.self;
         charactersCollectionView.register(cellClass, forCellWithReuseIdentifier: CharacterCell.identifier)
         charactersCollectionView.dataSource = self
@@ -83,5 +103,9 @@ private extension CharacterListViewController {
         charactersCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         charactersCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         charactersCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+    }
+    
+    @objc func accountButtonTapped() {
+        
     }
 }
