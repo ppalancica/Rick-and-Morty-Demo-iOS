@@ -8,19 +8,6 @@
 import Foundation
 import FirebaseAuth
 
-protocol SessionServiceType {
-    
-    var isUserLoggedIn: Bool { get }
-    
-    func createUser(withEmail email: String,
-                    password: String,
-                    completion: @escaping (Result<UserProfile, Error>) -> Void)
-    
-    func signIn(withEmail email: String,
-                password: String,
-                completion: @escaping (Result<UserProfile, Error>) -> Void)
-}
-
 class SessionService: SessionServiceType {
     
     var isUserLoggedIn: Bool {
@@ -32,42 +19,37 @@ class SessionService: SessionServiceType {
     func createUser(withEmail email: String,
                     password: String,
                     completion: @escaping (Result<UserProfile, Error>) -> Void) {
-        
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            guard let user = authResult?.user,
-                  let email = user.email, !email.isEmpty else {
-                print("Auth.auth().createUser(...) did not return a valid user")
-                return
-            }
-            
-            completion(.success(UserProfile(email: email)))
+            self.processAuthDataResponse(authResult: authResult, error: error, completion: completion)
         }
     }
-    
     
     func signIn(withEmail email: String,
                 password: String,
                 completion: @escaping (Result<UserProfile, Error>) -> Void) {
-        
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-            
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            guard let user = authResult?.user,
-                  let email = user.email, !email.isEmpty else {
-                print("Auth.auth().createUser(...) did not return a valid user")
-                return
-            }
-            
-            completion(.success(UserProfile(email: email)))
+            self.processAuthDataResponse(authResult: authResult, error: error, completion: completion)
         }
+    }
+}
+
+// MARK: - Helper Methods
+
+private extension SessionService {
+    
+    private func processAuthDataResponse(authResult: AuthDataResult?, error: Error?,
+                                         completion: @escaping (Result<UserProfile, Error>) -> Void) {
+        if let error = error {
+            completion(.failure(error))
+            return
+        }
+        
+        guard let user = authResult?.user,
+              let email = user.email, !email.isEmpty else {
+            print("Auth.auth()'s createUser or signIn method did not return a valid user")
+            return
+        }
+        
+        completion(.success(UserProfile(email: email)))
     }
 }

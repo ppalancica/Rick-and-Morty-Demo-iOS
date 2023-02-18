@@ -43,6 +43,7 @@
 		B39D267229A0F68300926081 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D267129A0F68300926081 /* SignupViewController.swift */; };
 		B39D267629A128AB00926081 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D267529A128AB00926081 /* UserProfileViewController.swift */; };
 		B39D267829A131EC00926081 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D267729A131EC00926081 /* UserProfile.swift */; };
+		B39D267C29A13C4600926081 /* SessionServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D267B29A13C4600926081 /* SessionServiceType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,7 @@
 		B39D267129A0F68300926081 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		B39D267529A128AB00926081 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		B39D267729A131EC00926081 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		B39D267B29A13C4600926081 /* SessionServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionServiceType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -318,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				B39D2661299FE3A100926081 /* SessionService.swift */,
+				B39D267B29A13C4600926081 /* SessionServiceType.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -534,6 +537,7 @@
 				B350101A299E8B27009CFF6E /* CharacterDetailsCell.swift in Sources */,
 				B3319981299D24DF00FBA413 /* CharactersService.swift in Sources */,
 				B39D2662299FE3A100926081 /* SessionService.swift in Sources */,
+				B39D267C29A13C4600926081 /* SessionServiceType.swift in Sources */,
 				B331997F299D235F00FBA413 /* CharacterListViewModel.swift in Sources */,
 				B3319987299D327F00FBA413 /* CharacterPage.swift in Sources */,
 				B331997B299D1F6700FBA413 /* Coordinator.swift in Sources */,
