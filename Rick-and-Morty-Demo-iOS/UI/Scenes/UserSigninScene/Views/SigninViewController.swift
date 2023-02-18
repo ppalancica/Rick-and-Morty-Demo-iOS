@@ -136,7 +136,7 @@ private extension SigninViewController {
         signinButton.translatesAutoresizingMaskIntoConstraints = false
         signupStackView.translatesAutoresizingMaskIntoConstraints = false
         signupLabel.translatesAutoresizingMaskIntoConstraints = false
-        signinButton.translatesAutoresizingMaskIntoConstraints = false
+        signupButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
