@@ -89,11 +89,15 @@ private extension SignupViewController {
     }
     
     @objc func handleSignupButtonTap() {
-        delegate?.didTapSignup(email: "", password: "", inside: self)
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text,
+              let delegate = delegate else { return }
+        delegate.didTapSignup(email: email, password: password, inside: self)
     }
     
     @objc func handleSigninButtonTap() {
-        delegate?.didTapSignin(inside: self)
+        guard let delegate = delegate else { return }
+        delegate.didTapSignin(inside: self)
     }
 }
 
