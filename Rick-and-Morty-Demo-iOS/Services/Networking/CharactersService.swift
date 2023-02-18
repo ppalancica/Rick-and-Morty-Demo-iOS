@@ -15,13 +15,15 @@ protocol CharactersServiceType: AnyObject {
 
 class CharactersService: CharactersServiceType {
     
+    private var sharedSession = URLSession.shared
+    
     func getAllCharacters(completion: @escaping (Result<CharacterPage, Error>) -> Void) {
         guard let url = URL(string: "https://rickandmortyapi.com/api/character") else {
             completion(.failure(APIError.invalidURL)); return
         }
         
         let request = URLRequest(url: url)
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        let task = sharedSession.dataTask(with: request) { data, response, error in
             
             guard error == nil else {
                 completion(.failure(APIError.clientError)); return
@@ -55,7 +57,7 @@ class CharactersService: CharactersServiceType {
         }
         
         let request = URLRequest(url: url)
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        let task = sharedSession.dataTask(with: request) { data, response, error in
             
             guard error == nil else {
                 completion(.failure(APIError.clientError)); return
