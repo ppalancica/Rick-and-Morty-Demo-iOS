@@ -39,6 +39,8 @@
 		B39D2662299FE3A100926081 /* SessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D2661299FE3A100926081 /* SessionService.swift */; };
 		B39D266429A0D37E00926081 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B39D266329A0D37E00926081 /* GoogleService-Info.plist */; };
 		B39D266729A0D54B00926081 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39D266629A0D54B00926081 /* FirebaseAuth */; };
+		B39D266B29A0E15200926081 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D266A29A0E15200926081 /* SigninViewController.swift */; };
+		B39D267229A0F68300926081 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D267129A0F68300926081 /* SignupViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +95,8 @@
 		B39D265E299FE1DC00926081 /* BookmarkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkService.swift; sourceTree = "<group>"; };
 		B39D2661299FE3A100926081 /* SessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionService.swift; sourceTree = "<group>"; };
 		B39D266329A0D37E00926081 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B39D266A29A0E15200926081 /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
+		B39D267129A0F68300926081 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +221,8 @@
 		B3319970299D1C2800FBA413 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				B39D266929A0E12E00926081 /* UserSigninScene */,
+				B39D266829A0E10F00926081 /* UserSignupScene */,
 				B3319971299D1C2E00FBA413 /* CharacterListScene */,
 				B3501010299E7A67009CFF6E /* CharacterDetailsScene */,
 			);
@@ -312,6 +318,38 @@
 				B39D2661299FE3A100926081 /* SessionService.swift */,
 			);
 			path = Account;
+			sourceTree = "<group>";
+		};
+		B39D266829A0E10F00926081 /* UserSignupScene */ = {
+			isa = PBXGroup;
+			children = (
+				B39D266C29A0E15A00926081 /* Views */,
+			);
+			path = UserSignupScene;
+			sourceTree = "<group>";
+		};
+		B39D266929A0E12E00926081 /* UserSigninScene */ = {
+			isa = PBXGroup;
+			children = (
+				B39D267029A0EAAC00926081 /* Views */,
+			);
+			path = UserSigninScene;
+			sourceTree = "<group>";
+		};
+		B39D266C29A0E15A00926081 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B39D267129A0F68300926081 /* SignupViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B39D267029A0EAAC00926081 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B39D266A29A0E15200926081 /* SigninViewController.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -475,6 +513,8 @@
 				B350101E299EB3EB009CFF6E /* Episode.swift in Sources */,
 				B3319944299D13DC00FBA413 /* Rick_and_Morty_Demo_iOS.xcdatamodeld in Sources */,
 				B350101C299EB38E009CFF6E /* EpisodesService.swift in Sources */,
+				B39D267229A0F68300926081 /* SignupViewController.swift in Sources */,
+				B39D266B29A0E15200926081 /* SigninViewController.swift in Sources */,
 				B3501016299E7B22009CFF6E /* CharacterDetailsViewModel.swift in Sources */,
 				B331998B299D3A6400FBA413 /* APIError.swift in Sources */,
 			);

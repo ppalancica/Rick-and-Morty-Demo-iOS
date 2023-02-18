@@ -12,6 +12,8 @@ protocol CharacterListViewControllerDelegate: AnyObject {
     
     func didSelectCharacter(with viewModel: CharacterViewModelType,
                             inside viewController: CharacterListViewController)
+    
+    func didTapUserAccountButton(inside viewController: CharacterListViewController)
 }
 
 final class CharacterListViewController: UIViewController {
@@ -106,6 +108,8 @@ private extension CharacterListViewController {
     }
     
     @objc func accountButtonTapped() {
+        guard let delegate = delegate else { return }
         
+        delegate.didTapUserAccountButton(inside: self)
     }
 }

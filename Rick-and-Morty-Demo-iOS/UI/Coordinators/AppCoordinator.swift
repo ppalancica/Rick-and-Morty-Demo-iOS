@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class AppCoordinator: Coordinator {
     
@@ -19,15 +20,18 @@ class AppCoordinator: Coordinator {
     func start() {
         navigateToMainCharacterList()
     }
+    
+    let charactersService = CharactersService()
+    let episodesService = EpisodesService()
+    let bookmarkService = BookmarkService()
+    let sessionService = SessionService()
 }
 
-// MARK: - Private Methods
+// MARK: - Private Methods (Rick and Morty UI Browsing)
 
 private extension AppCoordinator {
     
     func navigateToMainCharacterList() {
-        let charactersService = CharactersService()
-        let episodesService = EpisodesService()
         let viewModel = CharacterListViewModel(charactersService: charactersService,
                                                episodesService: episodesService)
         let characterListVC = CharacterListViewController(viewModel: viewModel, delegate: self)
@@ -35,10 +39,6 @@ private extension AppCoordinator {
     }
     
     func navigateToCharacterDetails(with viewModel: CharacterViewModelType) {
-        let charactersService = CharactersService()
-        let episodesService = EpisodesService()
-        let bookmarkService = BookmarkService()
-        let sessionService = SessionService()
         let viewModel = CharacterDetailsViewModel(characterViewModel: viewModel,
                                                   charactersService: charactersService,
                                                   episodesService: episodesService,
@@ -49,10 +49,6 @@ private extension AppCoordinator {
     }
     
     func navigateToCharacterDetailsReplacingCurrentView(with viewModel: CharacterViewModelType) {
-        let charactersService = CharactersService()
-        let episodesService = EpisodesService()
-        let bookmarkService = BookmarkService()
-        let sessionService = SessionService()
         let viewModel = CharacterDetailsViewModel(characterViewModel: viewModel,
                                                   charactersService: charactersService,
                                                   episodesService: episodesService,
@@ -66,6 +62,25 @@ private extension AppCoordinator {
     }
 }
 
+// MARK: - Private Methods (Account Management)
+
+private extension AppCoordinator {
+    
+    func navigateToAccountSignup() {
+        
+    }
+    
+    func navigateToAccountSignin() {
+        let signinVC = SigninViewController(delegate: self)
+        navigationController.pushViewController(signinVC, animated: true)
+    }
+    
+    func navigateToAccountDetails() {
+        
+    }
+}
+
+
 // MARK: - CharacterListViewControllerDelegate Methods
 
 extension AppCoordinator: CharacterListViewControllerDelegate {
@@ -74,14 +89,37 @@ extension AppCoordinator: CharacterListViewControllerDelegate {
                             inside viewController: CharacterListViewController) {
         navigateToCharacterDetails(with: viewModel)
     }
+    
+    func didTapUserAccountButton(inside viewController: CharacterListViewController) {
+        if sessionService.isUserLoggedIn {
+            navigateToAccountDetails()
+        } else {
+            navigateToAccountSignin()
+        }
+    }
 }
 
-// MARK: - CharacterDetailsViewController Methods
+// MARK: - CharacterDetailsViewControllerDelegate Methods
 
 extension AppCoordinator: CharacterDetailsViewControllerDelegate {
     
     func didSelectCharacter(with viewModel: CharacterViewModelType,
                             inside viewController: CharacterDetailsViewController) {
         navigateToCharacterDetailsReplacingCurrentView(with: viewModel)
+    }
+}
+
+// MARK: - SigninViewControllerDelegate Methods
+
+extension AppCoordinator: SigninViewControllerDelegate {
+    
+    func didTapSignin(email: String,
+                      password: String,
+                      inside viewController: SigninViewController) {
+        
+    }
+    
+    func didTapSignup(inside viewController: SigninViewController) {
+        // Switch to Signup View
     }
 }
