@@ -21,6 +21,9 @@ class SessionService: SessionServiceType {
     
     init() {
         loggedInUserEmail = cachingService.lastLoggedInUserEmail()
+        if !loggedInUserEmail.isEmpty {
+            userProfile = UserProfile(email: loggedInUserEmail)
+        }
         print(loggedInUserEmail)
     }
     
