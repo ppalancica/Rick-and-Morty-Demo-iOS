@@ -10,6 +10,7 @@ import Foundation
 protocol SessionServiceType {
     
     var isUserLoggedIn: Bool { get }
+    var loggedInUserEmail: String { get }
     
     func createUser(withEmail email: String,
                     password: String,
@@ -18,4 +19,6 @@ protocol SessionServiceType {
     func signIn(withEmail email: String,
                 password: String,
                 completion: @escaping (Result<UserProfile, Error>) -> Void)
+    
+    func logout(completion: @escaping (Result<Bool, Error>) -> Void)
 }

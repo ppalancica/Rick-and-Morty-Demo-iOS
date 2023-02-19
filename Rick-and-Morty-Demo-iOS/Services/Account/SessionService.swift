@@ -14,7 +14,13 @@ class SessionService: SessionServiceType {
         userProfile?.email != nil // We'll check token in a Production App
     }
     
+    var loggedInUserEmail: String = ""
+    
     public private(set) var userProfile: UserProfile?
+    
+    init() {
+        self.loggedInUserEmail = UserDefaults.standard.string(forKey: "loggedInUserEmail") ?? ""
+    }
     
     func createUser(withEmail email: String,
                     password: String,
@@ -27,9 +33,18 @@ class SessionService: SessionServiceType {
     func signIn(withEmail email: String,
                 password: String,
                 completion: @escaping (Result<UserProfile, Error>) -> Void) {
-        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-            self.processAuthDataResponse(authResult: authResult, error: error, completion: completion)
-        }
+//        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+//            self.processAuthDataResponse(authResult: authResult, error: error, completion: completion)
+//        }
+        let userProfile = UserProfile(email: "pavel001@gmail.com") // UserProfile(email: email)
+        self.userProfile = userProfile
+        UserDefaults.standard.setValue(userProfile.email, forKey: "loggedInUserEmail")
+        completion(.success(userProfile))
+    }
+    
+    func logout(completion: @escaping (Result<Bool, Error>) -> Void) {
+        UserDefaults.standard.removeObject(forKey: loggedInUserEmail)
+        loggedInUserEmail = ""
     }
 }
 
@@ -50,6 +65,9 @@ private extension SessionService {
             return
         }
         
-        completion(.success(UserProfile(email: email)))
+        let userProfile = UserProfile(email: email)
+        self.userProfile = userProfile
+        UserDefaults.standard.setValue(userProfile.email, forKey: "loggedInUserEmail")
+        completion(.success(userProfile))
     }
 }

@@ -22,7 +22,7 @@ protocol CharacterDetailsViewModelType {
     
     var navigationTitle: String { get }
     var isCharacterBookmarked: Bool { get }
-    func bookmarkCharacter(with characterId: Int, completion: (Result<Bool, Error>) -> Void)
+    func tryBookmarkTogglingForCharacter(with characterId: Int, completion: (Result<Bool, Error>) -> Void)
     
     func loadSameEpisodeCharacters(completion: @escaping (Result<[CharacterViewModelType], Error>) -> Void)
 }
@@ -45,9 +45,21 @@ class CharacterDetailsViewModel: CharacterDetailsViewModelType {
         return bookmarkService.isCharacterBookmarked(with: selectedCharacterViewModel.characterId)
     }
     
-    func bookmarkCharacter(with characterId: Int, completion: (Result<Bool, Error>) -> Void) {
-        bookmarkService.bookmarkCharacter(with: characterId)
-        completion(.success(true)) // Assume it's successful for now
+    func tryBookmarkTogglingForCharacter(with characterId: Int, completion: (Result<Bool, Error>) -> Void) {
+        guard bookmarkService.isBookmarkEnabled else {
+            completion(.failure(BookmarkError.featureDisabledForAnonymousUsers))
+            return
+        }
+        bookmarkService.bookmarkToggleForCharacter(with: characterId) { result in
+            switch result {
+            case .success(let bookmarked):
+                completion(.success(bookmarked))
+                break
+            case .failure(let error):
+                completion(.failure(error))
+                break
+            }
+        }
     }
     
     required init(characterViewModel: CharacterViewModelType,

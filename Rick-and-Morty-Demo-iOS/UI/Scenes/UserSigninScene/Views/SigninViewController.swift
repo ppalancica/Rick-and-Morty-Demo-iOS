@@ -71,8 +71,8 @@ final class SigninViewController: UIViewController {
 // MARK: - UI Action Methods
 
 private extension SigninViewController {
-    @objc
-    func handleScrollViewTapGesture() {
+   
+    @objc func handleScrollViewTapGesture() {
         if emailTextField.isFirstResponder {
             emailTextField.resignFirstResponder()
         } else if passwordTextField.isFirstResponder {

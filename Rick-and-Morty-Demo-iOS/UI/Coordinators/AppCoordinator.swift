@@ -22,8 +22,8 @@ class AppCoordinator: Coordinator {
     
     let charactersService = CharactersService()
     let episodesService = EpisodesService()
-    let bookmarkService = BookmarkService()
     let sessionService = SessionService()
+    lazy var bookmarkService = BookmarkService(sessionService: sessionService, charactersService: charactersService)
 }
 
 // MARK: - Private Methods (Rick and Morty UI Browsing)
@@ -92,12 +92,18 @@ private extension AppCoordinator {
     }
     
     func navigateToUserProfile(userProfile: UserProfile) {
-        let userProfileVC = UserProfileViewController(email: userProfile.email)
+        let viewModel = UserProfileViewModel(userProfile: userProfile,
+                                             bookmarkService: bookmarkService,
+                                             episodesService: episodesService)
+        let userProfileVC = UserProfileViewController(viewModel: viewModel)
         navigationController.pushViewController(userProfileVC, animated: true)
     }
     
     func navigateToUserProfileReplacingCurrentView(userProfile: UserProfile) {
-        let userProfileVC = UserProfileViewController(email: userProfile.email)
+        let viewModel = UserProfileViewModel(userProfile: userProfile,
+                                             bookmarkService: bookmarkService,
+                                             episodesService: episodesService)
+        let userProfileVC = UserProfileViewController(viewModel: viewModel)
         var viewControllers = navigationController.viewControllers
         viewControllers.removeLast()
         viewControllers.append(userProfileVC)
@@ -173,7 +179,6 @@ extension AppCoordinator: SigninViewControllerDelegate {
                 print(error)
             }
         }
-        //navigateToUserProfileReplacingCurrentView(userProfile: UserProfile(email: "pavel001@gmail.com"))
     }
     
     func didTapSignup(inside viewController: SigninViewController) {

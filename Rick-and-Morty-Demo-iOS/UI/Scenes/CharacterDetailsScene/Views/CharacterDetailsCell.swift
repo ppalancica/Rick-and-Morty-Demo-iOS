@@ -9,8 +9,8 @@ import UIKit
 
 protocol CharacterDetailsCellDelegate: AnyObject {
     
-    func bookmarkCharacter(with characterId: Int,
-                           inside cell: CharacterDetailsCell)
+    func tryBookmarkingCharacter(with characterId: Int,
+                                 inside cell: CharacterDetailsCell)
 }
 
 final class CharacterDetailsCell: UICollectionViewCell {
@@ -187,11 +187,11 @@ private extension CharacterDetailsCell {
             fatalError("Illegal state")
         }
         // Using optimistic approach
-        bookmarked = !bookmarked
-        addToFavoritesButton.setImage(
-            UIImage(named: bookmarked ? "bookmark-filled" : "bookmark-normal"),
-            for: .normal
-        )
-        delegate.bookmarkCharacter(with: viewModel.characterId, inside: self)
+//        bookmarked = !bookmarked
+//        addToFavoritesButton.setImage(
+//            UIImage(named: bookmarked ? "bookmark-filled" : "bookmark-normal"),
+//            for: .normal
+//        )
+        delegate.tryBookmarkingCharacter(with: viewModel.characterId, inside: self)
     }
 }

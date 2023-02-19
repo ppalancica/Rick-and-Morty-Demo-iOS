@@ -7,23 +7,58 @@
 
 import Foundation
 
-protocol BookmarkServiceType {
-    
-    func isCharacterBookmarked(with characterId: Int) -> Bool
-    func bookmarkCharacter(with characterId: Int)
-}
-
 class BookmarkService: BookmarkServiceType {
     
+    private let sessionService: SessionServiceType
+    private let charactersService: CharactersService
+    
+    required init(sessionService: SessionServiceType, charactersService: CharactersService) {
+        self.sessionService = sessionService
+        self.charactersService = charactersService
+    }
+    
+    var isBookmarkEnabled: Bool {
+        return sessionService.isUserLoggedIn
+    }
+    
     func isCharacterBookmarked(with characterId: Int) -> Bool {
-        let bookmarkIds: [Int] = UserDefaults.standard.value(forKey: "BookmarkIds") as? [Int] ?? []
+        let email = sessionService.loggedInUserEmail
+        guard isBookmarkEnabled, !email.isEmpty else { return false }
+        let key = "\(email)_BookmarkIds"
+        let bookmarkIds: [Int] = UserDefaults.standard.value(forKey: key) as? [Int] ?? []
         return bookmarkIds.contains(characterId)
     }
     
-    func bookmarkCharacter(with characterId: Int) {
-        let bookmarkIds: [Int] = UserDefaults.standard.array(forKey: "BookmarkIds") as? [Int] ?? []
+    func bookmarkToggleForCharacter(with characterId: Int, completion: (Result<Bool, Error>) -> Void) {
+        let email = sessionService.loggedInUserEmail
+        guard isBookmarkEnabled, !email.isEmpty else {
+            completion(.failure(BookmarkError.featureDisabledForAnonymousUsers))
+            return
+        }
+        let key = "\(email)_BookmarkIds"
+        let bookmarkIds: [Int] = UserDefaults.standard.array(forKey: key) as? [Int] ?? []
         var updatedBookmarkIds = bookmarkIds
-        updatedBookmarkIds.append(characterId)
-        UserDefaults.standard.setValue(updatedBookmarkIds, forKey: "BookmarkIds")
+        
+        if bookmarkIds.contains(characterId) {
+            // Remove from Bookmarks
+            updatedBookmarkIds.removeFirst(characterId)
+        } else {
+            // Add to Bookmarks
+            updatedBookmarkIds.append(characterId)
+        }
+        UserDefaults.standard.setValue(updatedBookmarkIds, forKey: key)
+        completion(.success(true))
+    }
+    
+    func getAllBookmarkedCharacters(completion: @escaping (Result<[Character], Error>) -> Void) {
+        let email = sessionService.loggedInUserEmail
+        guard isBookmarkEnabled, !email.isEmpty else {
+            completion(.failure(BookmarkError.featureDisabledForAnonymousUsers))
+            return
+        }
+        let key = "\(email)_BookmarkIds"
+        let bookmarkIds: [Int] = UserDefaults.standard.array(forKey: key) as? [Int] ?? []
+        
+        charactersService.getCharacterWithIds(ids: bookmarkIds, completion: completion)
     }
 }

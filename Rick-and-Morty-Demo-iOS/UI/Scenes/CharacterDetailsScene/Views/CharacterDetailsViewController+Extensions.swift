@@ -171,12 +171,16 @@ extension CharacterDetailsViewController: UICollectionViewDelegateFlowLayout {
 
 extension CharacterDetailsViewController: CharacterDetailsCellDelegate {
     
-    func bookmarkCharacter(with characterId: Int,
-                           inside cell: CharacterDetailsCell) {
-        viewModel.bookmarkCharacter(with: characterId) { result in
+    func tryBookmarkingCharacter(with characterId: Int,
+                                 inside cell: CharacterDetailsCell) {
+        viewModel.tryBookmarkTogglingForCharacter(with: characterId) { [weak cell] result in
             switch result {
             case .success(let success):
                 print("Bookmarked response: \(success)")
+                cell?.configureWithViewModel(
+                    viewModel.selectedCharacterViewModel,
+                    bookmarked: viewModel.isCharacterBookmarked
+                )
             case .failure(let error):
                 print(error)
             }

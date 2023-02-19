@@ -44,6 +44,14 @@
 		B39D267629A128AB00926081 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D267529A128AB00926081 /* UserProfileViewController.swift */; };
 		B39D267829A131EC00926081 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D267729A131EC00926081 /* UserProfile.swift */; };
 		B39D267C29A13C4600926081 /* SessionServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D267B29A13C4600926081 /* SessionServiceType.swift */; };
+		B39D267E29A18B2200926081 /* BookmarkServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D267D29A18B2200926081 /* BookmarkServiceType.swift */; };
+		B39D268029A18F5A00926081 /* BookmarkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D267F29A18F5A00926081 /* BookmarkError.swift */; };
+		B39D268429A216F700926081 /* FavoriteCharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D268329A216F700926081 /* FavoriteCharacterCell.swift */; };
+		B39D268629A2196D00926081 /* UserProfileViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D268529A2196D00926081 /* UserProfileViewController+Extensions.swift */; };
+		B39D268829A21C4300926081 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D268729A21C4300926081 /* UserProfileViewModel.swift */; };
+		B39D268A29A221DD00926081 /* UserProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D268929A221DD00926081 /* UserProfileCell.swift */; };
+		B39D268C29A2269E00926081 /* FavoriteCharacterCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D268B29A2269E00926081 /* FavoriteCharacterCellViewModel.swift */; };
+		B39D268E29A23DC200926081 /* UserLogoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D268D29A23DC200926081 /* UserLogoutCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +111,14 @@
 		B39D267529A128AB00926081 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		B39D267729A131EC00926081 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		B39D267B29A13C4600926081 /* SessionServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionServiceType.swift; sourceTree = "<group>"; };
+		B39D267D29A18B2200926081 /* BookmarkServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkServiceType.swift; sourceTree = "<group>"; };
+		B39D267F29A18F5A00926081 /* BookmarkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkError.swift; sourceTree = "<group>"; };
+		B39D268329A216F700926081 /* FavoriteCharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCharacterCell.swift; sourceTree = "<group>"; };
+		B39D268529A2196D00926081 /* UserProfileViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfileViewController+Extensions.swift"; sourceTree = "<group>"; };
+		B39D268729A21C4300926081 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
+		B39D268929A221DD00926081 /* UserProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileCell.swift; sourceTree = "<group>"; };
+		B39D268B29A2269E00926081 /* FavoriteCharacterCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCharacterCellViewModel.swift; sourceTree = "<group>"; };
+		B39D268D29A23DC200926081 /* UserLogoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogoutCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -311,7 +327,9 @@
 		B39D265D299FE1A100926081 /* Bookmarking */ = {
 			isa = PBXGroup;
 			children = (
+				B39D267F29A18F5A00926081 /* BookmarkError.swift */,
 				B39D265E299FE1DC00926081 /* BookmarkService.swift */,
+				B39D267D29A18B2200926081 /* BookmarkServiceType.swift */,
 			);
 			path = Bookmarking;
 			sourceTree = "<group>";
@@ -360,7 +378,8 @@
 		B39D267429A1288C00926081 /* UserProfileScene */ = {
 			isa = PBXGroup;
 			children = (
-				B39D267529A128AB00926081 /* UserProfileViewController.swift */,
+				B39D268229A216DF00926081 /* ViewModels */,
+				B39D268129A216D500926081 /* Views */,
 			);
 			path = UserProfileScene;
 			sourceTree = "<group>";
@@ -383,6 +402,27 @@
 				B39D267729A131EC00926081 /* UserProfile.swift */,
 			);
 			path = "Cached Data";
+			sourceTree = "<group>";
+		};
+		B39D268129A216D500926081 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B39D268329A216F700926081 /* FavoriteCharacterCell.swift */,
+				B39D268D29A23DC200926081 /* UserLogoutCell.swift */,
+				B39D268929A221DD00926081 /* UserProfileCell.swift */,
+				B39D267529A128AB00926081 /* UserProfileViewController.swift */,
+				B39D268529A2196D00926081 /* UserProfileViewController+Extensions.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B39D268229A216DF00926081 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B39D268B29A2269E00926081 /* FavoriteCharacterCellViewModel.swift */,
+				B39D268729A21C4300926081 /* UserProfileViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -524,9 +564,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B39D268C29A2269E00926081 /* FavoriteCharacterCellViewModel.swift in Sources */,
 				B3319983299D251B00FBA413 /* Character.swift in Sources */,
 				B331997D299D1FEB00FBA413 /* AppCoordinator.swift in Sources */,
 				B3319996299D483B00FBA413 /* Location.swift in Sources */,
+				B39D268429A216F700926081 /* FavoriteCharacterCell.swift in Sources */,
 				B3319992299D3EEF00FBA413 /* CharacterListViewController+Extensions.swift in Sources */,
 				B331998F299D3E3400FBA413 /* CharacterCell.swift in Sources */,
 				B39D265F299FE1DC00926081 /* BookmarkService.swift in Sources */,
@@ -536,13 +578,19 @@
 				B3501018299E8AEA009CFF6E /* CharacterDetailsViewController+Extensions.swift in Sources */,
 				B350101A299E8B27009CFF6E /* CharacterDetailsCell.swift in Sources */,
 				B3319981299D24DF00FBA413 /* CharactersService.swift in Sources */,
+				B39D268029A18F5A00926081 /* BookmarkError.swift in Sources */,
 				B39D2662299FE3A100926081 /* SessionService.swift in Sources */,
+				B39D268829A21C4300926081 /* UserProfileViewModel.swift in Sources */,
+				B39D268A29A221DD00926081 /* UserProfileCell.swift in Sources */,
 				B39D267C29A13C4600926081 /* SessionServiceType.swift in Sources */,
+				B39D268E29A23DC200926081 /* UserLogoutCell.swift in Sources */,
 				B331997F299D235F00FBA413 /* CharacterListViewModel.swift in Sources */,
 				B3319987299D327F00FBA413 /* CharacterPage.swift in Sources */,
+				B39D268629A2196D00926081 /* UserProfileViewController+Extensions.swift in Sources */,
 				B331997B299D1F6700FBA413 /* Coordinator.swift in Sources */,
 				B39D267829A131EC00926081 /* UserProfile.swift in Sources */,
 				B39D267629A128AB00926081 /* UserProfileViewController.swift in Sources */,
+				B39D267E29A18B2200926081 /* BookmarkServiceType.swift in Sources */,
 				B3501012299E7AA3009CFF6E /* CharacterDetailsViewController.swift in Sources */,
 				B3319974299D1CBF00FBA413 /* CharacterListViewController.swift in Sources */,
 				B3319989299D356000FBA413 /* CharacterViewModel.swift in Sources */,
