@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="20G624" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CharacterEntity" representedClassName="CharacterEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="bookmarkingUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserEntity" inverseName="characters" inverseEntity="UserEntity"/>
+    </entity>
+    <entity name="LoggedInUserEntity" representedClassName="LoggedInUserEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="email" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="UserEntity" representedClassName="UserEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <relationship name="characters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CharacterEntity" inverseName="bookmarkingUser" inverseEntity="CharacterEntity"/>
+    </entity>
+    <elements>
+        <element name="CharacterEntity" positionX="-54" positionY="-9" width="128" height="59"/>
+        <element name="LoggedInUserEntity" positionX="-27" positionY="36" width="128" height="44"/>
+        <element name="UserEntity" positionX="-63" positionY="-18" width="128" height="59"/>
+    </elements>
 </model>

@@ -72,8 +72,7 @@ private extension CharacterListViewController {
     func setupUI() {
         title = "Rick and Morty"
         view.backgroundColor = .white
-        // let userImage = UIImage(named: "user-circle-fill")
-        let userButton = UIBarButtonItem(title: "Account", // image: userImage
+        let userButton = UIBarButtonItem(title: "Account",
                                          style: .plain,
                                          target: self,
                                          action: #selector(accountButtonTapped))

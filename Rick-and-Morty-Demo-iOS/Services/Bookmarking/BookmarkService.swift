@@ -11,6 +11,7 @@ class BookmarkService: BookmarkServiceType {
     
     private let sessionService: SessionServiceType
     private let charactersService: CharactersService
+    private let cachingService = CachingService.shared
     
     required init(sessionService: SessionServiceType, charactersService: CharactersService) {
         self.sessionService = sessionService
@@ -23,10 +24,11 @@ class BookmarkService: BookmarkServiceType {
     
     func isCharacterBookmarked(with characterId: Int) -> Bool {
         let email = sessionService.loggedInUserEmail
-        guard isBookmarkEnabled, !email.isEmpty else { return false }
-        let key = "\(email)_BookmarkIds"
-        let bookmarkIds: [Int] = UserDefaults.standard.value(forKey: key) as? [Int] ?? []
-        return bookmarkIds.contains(characterId)
+        guard isBookmarkEnabled, !email.isEmpty else {
+            return false
+        }
+        
+        return cachingService.isCharacterBookmarkedForLoggedInUser(characterId: characterId, email: email)
     }
     
     func bookmarkToggleForCharacter(with characterId: Int, completion: (Result<Bool, Error>) -> Void) {
@@ -35,19 +37,8 @@ class BookmarkService: BookmarkServiceType {
             completion(.failure(BookmarkError.featureDisabledForAnonymousUsers))
             return
         }
-        let key = "\(email)_BookmarkIds"
-        let bookmarkIds: [Int] = UserDefaults.standard.array(forKey: key) as? [Int] ?? []
-        var updatedBookmarkIds = bookmarkIds
         
-        if bookmarkIds.contains(characterId) {
-            // Remove from Bookmarks
-            updatedBookmarkIds.removeFirst(characterId)
-        } else {
-            // Add to Bookmarks
-            updatedBookmarkIds.append(characterId)
-        }
-        UserDefaults.standard.setValue(updatedBookmarkIds, forKey: key)
-        completion(.success(true))
+        cachingService.bookmarkToggleForCharacter(characterId: characterId, email: email, completion: completion)
     }
     
     func getAllBookmarkedCharacters(completion: @escaping (Result<[Character], Error>) -> Void) {
@@ -56,9 +47,17 @@ class BookmarkService: BookmarkServiceType {
             completion(.failure(BookmarkError.featureDisabledForAnonymousUsers))
             return
         }
-        let key = "\(email)_BookmarkIds"
-        let bookmarkIds: [Int] = UserDefaults.standard.array(forKey: key) as? [Int] ?? []
         
-        charactersService.getCharacterWithIds(ids: bookmarkIds, completion: completion)
+        cachingService.getAllBookmarkedCharactersIds(email: email) { [weak self] result in
+            switch result {
+            case .success(let characterIds):
+                guard let strongSelf = self else { return }
+                strongSelf.charactersService.getCharacterWithIds(ids: characterIds, completion: completion)
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        }
     }
 }

@@ -4,11 +4,12 @@
 //
 //  Created by Palancica Pavel on 17.02.2023.
 //
-
 import Foundation
 import FirebaseAuth
 
 class SessionService: SessionServiceType {
+    
+    private let cachingService = CachingService.shared
     
     var isUserLoggedIn: Bool {
         guard let email = userProfile?.email else { return false }
@@ -19,7 +20,8 @@ class SessionService: SessionServiceType {
     public private(set) var userProfile: UserProfile?
     
     init() {
-        self.loggedInUserEmail = UserDefaults.standard.string(forKey: "loggedInUserEmail") ?? ""
+        loggedInUserEmail = cachingService.lastLoggedInUserEmail()
+        print(loggedInUserEmail)
     }
     
     func createUser(withEmail email: String,
@@ -33,17 +35,13 @@ class SessionService: SessionServiceType {
     func signIn(withEmail email: String,
                 password: String,
                 completion: @escaping (Result<UserProfile, Error>) -> Void) {
-//        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-//            self.processAuthDataResponse(authResult: authResult, error: error, completion: completion)
-//        }
-        let userProfile = UserProfile(email: "pavel001@gmail.com") // UserProfile(email: email)
-        self.userProfile = userProfile
-        UserDefaults.standard.setValue(userProfile.email, forKey: "loggedInUserEmail")
-        completion(.success(userProfile))
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            self.processAuthDataResponse(authResult: authResult, error: error, completion: completion)
+        }
     }
     
     func logout(completion: @escaping (Result<Bool, Error>) -> Void) {
-        UserDefaults.standard.removeObject(forKey: "loggedInUserEmail")
+        cachingService.removeLoggedInUser()
         userProfile = nil
         loggedInUserEmail = ""
         completion(.success(true))
@@ -70,7 +68,7 @@ private extension SessionService {
         let userProfile = UserProfile(email: email)
         self.userProfile = userProfile
         loggedInUserEmail = userProfile.email
-        UserDefaults.standard.setValue(userProfile.email, forKey: "loggedInUserEmail")
+        CachingService.shared.saveUserProfile(userProfile)
         completion(.success(userProfile))
     }
 }

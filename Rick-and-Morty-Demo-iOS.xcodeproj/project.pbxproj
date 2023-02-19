@@ -52,6 +52,8 @@
 		B39D268A29A221DD00926081 /* UserProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D268929A221DD00926081 /* UserProfileCell.swift */; };
 		B39D268C29A2269E00926081 /* FavoriteCharacterCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D268B29A2269E00926081 /* FavoriteCharacterCellViewModel.swift */; };
 		B39D268E29A23DC200926081 /* UserLogoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D268D29A23DC200926081 /* UserLogoutCell.swift */; };
+		B39D269029A254CF00926081 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D268F29A254CF00926081 /* CoreDataStack.swift */; };
+		B39D269229A256BD00926081 /* CachingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D269129A256BD00926081 /* CachingService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +121,8 @@
 		B39D268929A221DD00926081 /* UserProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileCell.swift; sourceTree = "<group>"; };
 		B39D268B29A2269E00926081 /* FavoriteCharacterCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCharacterCellViewModel.swift; sourceTree = "<group>"; };
 		B39D268D29A23DC200926081 /* UserLogoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogoutCell.swift; sourceTree = "<group>"; };
+		B39D268F29A254CF00926081 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		B39D269129A256BD00926081 /* CachingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +237,8 @@
 		B331996F299D1C0F00FBA413 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				B39D268F29A254CF00926081 /* CoreDataStack.swift */,
+				B39D269129A256BD00926081 /* CachingService.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -591,6 +597,8 @@
 				B39D267829A131EC00926081 /* UserProfile.swift in Sources */,
 				B39D267629A128AB00926081 /* UserProfileViewController.swift in Sources */,
 				B39D267E29A18B2200926081 /* BookmarkServiceType.swift in Sources */,
+				B39D269229A256BD00926081 /* CachingService.swift in Sources */,
+				B39D269029A254CF00926081 /* CoreDataStack.swift in Sources */,
 				B3501012299E7AA3009CFF6E /* CharacterDetailsViewController.swift in Sources */,
 				B3319974299D1CBF00FBA413 /* CharacterListViewController.swift in Sources */,
 				B3319989299D356000FBA413 /* CharacterViewModel.swift in Sources */,

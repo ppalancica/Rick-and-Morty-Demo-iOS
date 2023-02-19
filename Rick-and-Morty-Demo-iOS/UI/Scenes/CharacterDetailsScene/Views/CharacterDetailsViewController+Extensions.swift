@@ -176,7 +176,7 @@ extension CharacterDetailsViewController: CharacterDetailsCellDelegate {
         viewModel.tryBookmarkTogglingForCharacter(with: characterId) { [weak cell] result in
             switch result {
             case .success(let success):
-                print("Bookmarked response: \(success)")
+                print("Bookmarked: \(success)")
                 cell?.configureWithViewModel(
                     viewModel.selectedCharacterViewModel,
                     bookmarked: viewModel.isCharacterBookmarked

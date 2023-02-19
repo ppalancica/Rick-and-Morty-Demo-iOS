@@ -30,19 +30,6 @@ class CharacterListViewModel: CharacterListViewModelType {
         self.episodesService = episodesService
     }
     
-//    func getAllCharactersViewModels(completion: @escaping (Result<[CharacterViewModel], Error>) -> Void) {
-//        charactersService.getAllCharacters { result in
-//            switch result {
-//            case .success(let characterResponse):
-//                let viewModels = characterResponse.results.map(CharacterViewModel.init)
-//                self.viewModels = viewModels
-//                completion(.success(viewModels))
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-//    }
-    
     func getAllCharactersViewModels(completion: @escaping (Result<[CharacterViewModel], Error>) -> Void) {
         let group = DispatchGroup()
         

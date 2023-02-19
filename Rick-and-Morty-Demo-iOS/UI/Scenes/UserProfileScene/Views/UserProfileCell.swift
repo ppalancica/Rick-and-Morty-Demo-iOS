@@ -41,6 +41,7 @@ private extension UserProfileCell {
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "user-circle-fill")
         return imageView
     }
     
