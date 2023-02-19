@@ -57,9 +57,9 @@ private extension UserLogoutCell {
     }
     
     func configureConstraints() {
-        logoutButton.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
+        logoutButton.topAnchor.constraint(equalTo: topAnchor, constant: 16).isActive = true
         logoutButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
-        logoutButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+        logoutButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
         logoutButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
     }
 }

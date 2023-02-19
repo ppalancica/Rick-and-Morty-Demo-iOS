@@ -95,7 +95,7 @@ private extension AppCoordinator {
         let viewModel = UserProfileViewModel(userProfile: userProfile,
                                              bookmarkService: bookmarkService,
                                              episodesService: episodesService)
-        let userProfileVC = UserProfileViewController(viewModel: viewModel)
+        let userProfileVC = UserProfileViewController(viewModel: viewModel, delegate: self)
         navigationController.pushViewController(userProfileVC, animated: true)
     }
     
@@ -103,7 +103,7 @@ private extension AppCoordinator {
         let viewModel = UserProfileViewModel(userProfile: userProfile,
                                              bookmarkService: bookmarkService,
                                              episodesService: episodesService)
-        let userProfileVC = UserProfileViewController(viewModel: viewModel)
+        let userProfileVC = UserProfileViewController(viewModel: viewModel, delegate: self)
         var viewControllers = navigationController.viewControllers
         viewControllers.removeLast()
         viewControllers.append(userProfileVC)
@@ -183,5 +183,17 @@ extension AppCoordinator: SigninViewControllerDelegate {
     
     func didTapSignup(inside viewController: SigninViewController) {
         navigateToAccountSignupReplacingCurrentView()
+    }
+}
+
+// MARK: - UserProfileViewControllerDelegate Methods
+
+extension AppCoordinator: UserProfileViewControllerDelegate {
+    
+    func didTapLogout(inside viewController: UserProfileViewController) {
+        sessionService.logout { [weak self] result in
+            // For the Demo, we'd assume Log Out always succeeds
+            self?.navigationController.popViewController(animated: true)
+        }
     }
 }

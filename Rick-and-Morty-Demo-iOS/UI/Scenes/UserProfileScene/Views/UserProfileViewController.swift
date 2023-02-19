@@ -7,9 +7,16 @@
 
 import UIKit
 
+protocol UserProfileViewControllerDelegate: AnyObject {
+        
+    func didTapLogout(inside viewController: UserProfileViewController)
+}
+
 final class UserProfileViewController: UIViewController {
     
     public let viewModel: UserProfileViewModel
+    
+    weak var delegate: UserProfileViewControllerDelegate?
     
     private lazy var charactersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -23,8 +30,9 @@ final class UserProfileViewController: UIViewController {
         return collectionView
     }()
     
-    init(viewModel: UserProfileViewModel) {
+    init(viewModel: UserProfileViewModel, delegate: UserProfileViewControllerDelegate) {
         self.viewModel = viewModel
+        self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
     }
     

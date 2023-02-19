@@ -178,6 +178,7 @@ extension UserProfileViewController: UICollectionViewDelegateFlowLayout {
 extension UserProfileViewController: UserLogoutCellDelegate {
     
     func logoutButtonTapped() {
-        
+        guard let delegate = delegate else { return }
+        delegate.didTapLogout(inside: self)
     }
 }

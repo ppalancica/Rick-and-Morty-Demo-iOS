@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 protocol CharacterListViewControllerDelegate: AnyObject {
     
@@ -20,7 +19,6 @@ final class CharacterListViewController: UIViewController {
     
     public let viewModel: CharacterListViewModelType
     weak var delegate: CharacterListViewControllerDelegate?
-    var handle: AuthStateDidChangeListenerHandle?
     
     private lazy var charactersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -65,18 +63,6 @@ final class CharacterListViewController: UIViewController {
             case .failure(let error):
                 print(error)
             }
-        }
-        
-        handle = Auth.auth().addStateDidChangeListener { auth, user in
-            // reload/refresh UI
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if handle != nil {
-            Auth.auth().removeStateDidChangeListener(handle!)
         }
     }
 }

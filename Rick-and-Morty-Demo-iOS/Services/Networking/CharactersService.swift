@@ -115,7 +115,13 @@ class CharactersService: CharactersServiceType {
             
             DispatchQueue.main.async {
                 do {
-                    let characters = try JSONDecoder().decode([Character].self, from: data)
+                    let characters: [Character]
+                    if ids.count == 1 {
+                        let character = try JSONDecoder().decode(Character.self, from: data)
+                        characters = [character]
+                    } else {
+                        characters = try JSONDecoder().decode([Character].self, from: data)
+                    }
                     completion(.success(characters))
                 } catch {
                     completion(.failure(APIError.jsonDecodingError))

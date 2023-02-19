@@ -11,11 +11,11 @@ import FirebaseAuth
 class SessionService: SessionServiceType {
     
     var isUserLoggedIn: Bool {
-        userProfile?.email != nil // We'll check token in a Production App
+        guard let email = userProfile?.email else { return false }
+        return !email.isEmpty // We'll check token in a Production App
     }
     
     var loggedInUserEmail: String = ""
-    
     public private(set) var userProfile: UserProfile?
     
     init() {
@@ -43,8 +43,10 @@ class SessionService: SessionServiceType {
     }
     
     func logout(completion: @escaping (Result<Bool, Error>) -> Void) {
-        UserDefaults.standard.removeObject(forKey: loggedInUserEmail)
+        UserDefaults.standard.removeObject(forKey: "loggedInUserEmail")
+        userProfile = nil
         loggedInUserEmail = ""
+        completion(.success(true))
     }
 }
 
@@ -67,6 +69,7 @@ private extension SessionService {
         
         let userProfile = UserProfile(email: email)
         self.userProfile = userProfile
+        loggedInUserEmail = userProfile.email
         UserDefaults.standard.setValue(userProfile.email, forKey: "loggedInUserEmail")
         completion(.success(userProfile))
     }
